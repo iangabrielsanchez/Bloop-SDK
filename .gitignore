@@ -1,0 +1,13 @@
+.settings
+*.settings
+*.project
+*.classpath
+*.checkstyle
+.project
+.DS_Store
+.idea/
+*.iml
+*.clist
+bin.settings
+bin
+target/
