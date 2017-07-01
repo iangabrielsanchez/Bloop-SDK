@@ -1,7 +1,6 @@
 package com.tdc.bloop.utilities
 
 import com.esotericsoftware.kryo.Kryo
-import com.sun.org.apache.xalan.internal.xsltc.cmdline.Compile
 import com.tdc.bloop.models.StringRequest
 import com.tdc.bloop.models.StringResponse
 import groovy.transform.CompileStatic
