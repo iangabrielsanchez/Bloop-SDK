@@ -10,7 +10,7 @@ class BloopSettings {
 
     private int timeout = 5000
     private int hostPort = 25667
-    private String hostName
+    private String host
     private String applicationName = 'BloopApplication'
 
     int getHostPort() {
@@ -35,7 +35,14 @@ class BloopSettings {
 
     void setApplicationName( String applicationName ) {
         this.applicationName = applicationName
+    }
 
+    String getHost(){
+        return this.host
+    }
+
+    void setHost(){
+        this.host = host
     }
 
 }
