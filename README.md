@@ -25,7 +25,7 @@ This is achieved by...
 - API: Implemented on applications to make use of the service
 
 
-## Installation Maven
+## Maven Installation
 ### Latest release version
 ```
 <dependency>
