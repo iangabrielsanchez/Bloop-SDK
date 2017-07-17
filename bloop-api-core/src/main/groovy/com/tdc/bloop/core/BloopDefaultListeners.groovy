@@ -13,7 +13,7 @@ import groovy.transform.CompileStatic
  * @author Ian Gabriel Sanchez
  */
 @CompileStatic
-class BloopDefaultListeners extends Listener{
+class BloopDefaultListeners extends Listener {
 
     @Override
     void received( Connection connection, Object object ) {

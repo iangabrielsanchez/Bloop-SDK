@@ -10,7 +10,7 @@ class BloopListenerService {
     static BloopClient bloopClient
     static BloopSettings bloopSettings
 
-    void initialize(){
+    void initialize() {
         bloopSettings = new BloopSettings()
     }
 

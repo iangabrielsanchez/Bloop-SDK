@@ -57,7 +57,7 @@ class BloopServer extends Server {
      * Checks if the current BloopServer instance is initialized.
      * @return The initialized status of the BloopServer
      */
-    boolean isInitialized(){
+    boolean isInitialized() {
         return initialized
     }
 

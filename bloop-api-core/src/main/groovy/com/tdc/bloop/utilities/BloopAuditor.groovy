@@ -27,8 +27,8 @@ class BloopAuditor {
      * @param kryo The kryo instance of the BloopClient or the BloopServer
      * @param dataTypes The datatypes that need to be registered.
      */
-    static void registerClasses(Kryo kryo, Class[] dataTypes){
-        for(Class dataType: dataTypes){
+    static void registerClasses( Kryo kryo, Class[] dataTypes ) {
+        for( Class dataType : dataTypes ) {
             kryo.register( dataType )
         }
     }
@@ -38,8 +38,8 @@ class BloopAuditor {
      * @see <a href="https://github.com/EsotericSoftware/kryo">Kryo Serialization Library</a>
      * @param kryo The kryo instance of the BloopClient or the BloopServer
      */
-    static void registerDefaultClasses(Kryo kryo){
-        registerClasses(kryo, defaultTypes)
+    static void registerDefaultClasses( Kryo kryo ) {
+        registerClasses( kryo, defaultTypes )
     }
 
 }
