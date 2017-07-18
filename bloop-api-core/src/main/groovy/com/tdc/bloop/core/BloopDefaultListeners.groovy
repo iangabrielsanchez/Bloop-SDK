@@ -6,15 +6,19 @@ import com.tdc.bloop.models.StringRequest
 import groovy.transform.CompileStatic
 
 /**
- * Created by ianga on 1 Jul 2017.
+ * Contains all the default bloop listeners. This determines
+ * what should happen to a request depending on its type.
+ *
+ * @since 1.0
+ * @author Ian Gabriel Sanchez
  */
 @CompileStatic
-class BloopDefaultListeners extends Listener{
+class BloopDefaultListeners extends Listener {
 
     @Override
     void received( Connection connection, Object object ) {
         if( object instanceof StringRequest ) {
-            //do something
+            //TODO: Add necessary request types and responses.
         }
     }
 
