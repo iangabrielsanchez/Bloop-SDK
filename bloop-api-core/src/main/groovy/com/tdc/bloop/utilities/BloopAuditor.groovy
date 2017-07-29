@@ -1,9 +1,13 @@
 package com.tdc.bloop.utilities
 
 import com.esotericsoftware.kryo.Kryo
+import com.tdc.bloop.models.HostInformation
 import com.tdc.bloop.models.StringRequest
 import com.tdc.bloop.models.StringResponse
+import java.net.NetworkInterface
 import groovy.transform.CompileStatic
+
+import java.util.regex.Pattern
 
 /**
  * This class contains all the methods required for auditing all BloopTransactions.
@@ -40,6 +44,39 @@ class BloopAuditor {
      */
     static void registerDefaultClasses( Kryo kryo ) {
         registerClasses( kryo, defaultTypes )
+    }
+
+    static HostInformation getHostInformation() {
+
+        Enumeration networkInterfaces = NetworkInterface.getNetworkInterfaces()
+
+        while( networkInterfaces.hasMoreElements() ) {
+
+            NetworkInterface networkInterface = ( NetworkInterface ) networkInterfaces.nextElement()
+            Enumeration networkAddresses = networkInterface.inetAddresses
+            List<InterfaceAddress> addressList = networkInterface.interfaceAddresses
+            HostInformation information = new HostInformation()
+
+            while( networkAddresses.hasMoreElements() ) {
+
+                InetAddress inetAddress = ( InetAddress ) networkAddresses.nextElement()
+
+                if( inetAddress.isSiteLocalAddress() ) {
+                    information.inetAddress = inetAddress
+                    information.networkInterface = networkInterface
+
+                    for( InterfaceAddress address in addressList ) {
+                        if( address.address instanceof Inet4Address ) {
+                            information.networkPrefix = address.networkPrefixLength
+                        }
+                    }
+
+                    return information
+                }
+
+            }
+
+        }
     }
 
 }
