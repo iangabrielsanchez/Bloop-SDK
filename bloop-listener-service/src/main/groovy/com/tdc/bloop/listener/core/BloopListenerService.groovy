@@ -1,7 +1,5 @@
 package com.tdc.bloop.listener.core
 
-import com.tdc.bloop.core.BloopClient
-import com.tdc.bloop.core.BloopServer
 import com.tdc.bloop.core.BloopSettings
 import com.tdc.bloop.utilities.BloopAuditor
 
