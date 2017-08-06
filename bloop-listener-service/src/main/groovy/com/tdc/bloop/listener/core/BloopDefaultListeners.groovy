@@ -1,4 +1,4 @@
-package com.tdc.bloop.core
+package com.tdc.bloop.listener.core
 
 import com.esotericsoftware.kryonet.Connection
 import com.esotericsoftware.kryonet.Listener

@@ -1,6 +1,7 @@
-package com.tdc.bloop.core
+package com.tdc.bloop.listener.core
 
 import com.esotericsoftware.kryonet.Server
+import com.tdc.bloop.core.BloopSettings
 import com.tdc.bloop.utilities.BloopAuditor
 import groovy.transform.CompileStatic
 
