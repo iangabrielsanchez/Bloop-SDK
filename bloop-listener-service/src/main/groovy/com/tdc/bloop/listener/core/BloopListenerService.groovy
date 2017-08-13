@@ -12,6 +12,9 @@ class BloopListenerService {
 
     private static String settingsFilePath
 
+    public List<Map<String, String>> clients;
+
+
     void initialize() {
         //if path is not null,try to initialize, if fail or else, create file
         if( settingsFilePath != null ) {
