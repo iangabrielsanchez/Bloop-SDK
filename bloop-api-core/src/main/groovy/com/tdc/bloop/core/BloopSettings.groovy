@@ -10,7 +10,7 @@ import groovy.transform.CompileStatic
  * @author Ian Gabriel Sanchez
  */
 @CompileStatic
-class BloopSettings {
+class BloopSettings extends Object {
 
     int timeout
     int hostPort
@@ -77,6 +77,5 @@ class BloopSettings {
         this.timeout = timeout
         return this
     }
-
 
 }
