@@ -34,7 +34,9 @@ class BloopDefaultListeners extends Listener {
             connection.sendTCP( new ClientListResponse( ( ClientListRequest ) object ) )
         }
         else if( object instanceof ClientListResponse ) {
-            BloopListenerService.clients = ((ClientListResponse) object).clients
+            if(((ClientListResponse) object).succeeded) {
+                BloopListenerService.clients = ( ( ClientListResponse ) object ).clients
+            }
         }
     }
 }

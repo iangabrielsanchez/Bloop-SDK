@@ -6,5 +6,5 @@ class HelloRequest {
     String hostIP
     String macAddress
     String key
-    List<Map<String, String>> clients
+    Map<String, String> clients
 }

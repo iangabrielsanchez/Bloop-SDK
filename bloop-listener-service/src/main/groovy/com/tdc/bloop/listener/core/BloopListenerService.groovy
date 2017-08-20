@@ -12,7 +12,7 @@ class BloopListenerService {
 
     private static String settingsFilePath
 
-    static List<Map<String, String>> clients = [];
+    static Map<String, String> clients = [];
 
 
     void initialize() {
@@ -41,7 +41,6 @@ class BloopListenerService {
                     bufferedWriter.flush()
                     bufferedWriter.close()
                 }
-
             }
             catch( Exception ex ) {
                 //do nothing
@@ -55,7 +54,6 @@ class BloopListenerService {
         if( args.length > 0 ) {
             settingsFilePath = args[ 0 ]
         }
-
         new BloopListenerService().initialize()
     }
 

@@ -1,13 +1,14 @@
 package com.tdc.bloop.listener.model
 
 import com.tdc.bloop.listener.core.BloopListenerService
+import com.tdc.bloop.listener.core.BloopRequestHandler
 
 /**
  * Created by tjako on 8/13/2017.
  */
 class ClientListResponse extends Response {
 
-    List<Map<String, String>> clients = null;
+    Map<String, String> clients = [];
 
     void response( boolean succeeded, String message, List<Map<String, String>> clients ) {
         this.succeeded = succeeded
@@ -20,9 +21,9 @@ class ClientListResponse extends Response {
             basicResponse( false, "Client List Response Failed, Client List Request Failed" )
         }
         else {
-            List<Map<String, String>> clients
+            Map<String, String> clients
             // Synchronize the Client List of the current device and the responder
-            clients = synchronizeClients(response.clients,  BloopListenerService.clients)
+            clients = BloopRequestHandler.syncronizeClients(response.clients,  BloopListenerService.clients)
             // Update the device list
             BloopListenerService.clients = clients
             // Return the updated list to the responder
