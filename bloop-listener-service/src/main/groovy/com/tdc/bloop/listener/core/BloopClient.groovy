@@ -1,8 +1,8 @@
 package com.tdc.bloop.listener.core
 
 import com.esotericsoftware.kryonet.Client
-import com.tdc.bloop.core.BloopSettings
-import com.tdc.bloop.utilities.BloopAuditor
+import com.tdc.bloop.listener.model.BloopSettings
+import com.tdc.bloop.listener.utilities.BloopAuditor
 import groovy.transform.CompileStatic
 
 /**
@@ -32,7 +32,7 @@ class BloopClient extends Client {
     private void initializeComponents() {
         try {
             this.start()
-            this.connect( settings.timeout, settings.host, settings.hostPort )
+            //this.connect( settings.timeout, settings.host, settings.hostPort )
             BloopAuditor.registerClasses( this.kryo )
             this.addListener( new BloopDefaultListeners() )
             initialized = true

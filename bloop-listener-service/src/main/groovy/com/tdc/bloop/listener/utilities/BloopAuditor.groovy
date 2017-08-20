@@ -1,14 +1,8 @@
-package com.tdc.bloop.utilities
+package com.tdc.bloop.listener.utilities
 
 import com.esotericsoftware.kryo.Kryo
-import com.tdc.bloop.models.HostInformation
-import com.tdc.bloop.models.StringRequest
-import com.tdc.bloop.models.StringResponse
-import java.net.NetworkInterface
+import com.tdc.bloop.listener.model.*
 import groovy.transform.CompileStatic
-
-import java.util.regex.Pattern
-
 /**
  * This class contains all the methods required for auditing all BloopTransactions.
  *
@@ -19,8 +13,11 @@ import java.util.regex.Pattern
 class BloopAuditor {
 
     private static final Class[] defaultTypes = [
-            StringRequest.class,
-            StringResponse.class,
+            ClientListRequest.class,
+            ClientListResponse.class,
+            HelloRequest.class,
+            HelloResponse.class,
+            Response.class
     ]
 
     /**
@@ -70,12 +67,9 @@ class BloopAuditor {
                             information.networkPrefix = address.networkPrefixLength
                         }
                     }
-
                     return information
                 }
-
             }
-
         }
     }
 

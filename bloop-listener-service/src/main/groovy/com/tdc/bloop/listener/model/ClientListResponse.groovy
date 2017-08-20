@@ -8,7 +8,7 @@ import com.tdc.bloop.listener.core.BloopRequestHandler
  */
 class ClientListResponse extends Response {
 
-    Map<String, String> clients = [:];
+    Map<String, String> clients = [ : ];
 
     void response( boolean succeeded, String message, List<Map<String, String>> clients ) {
         this.succeeded = succeeded
@@ -23,7 +23,7 @@ class ClientListResponse extends Response {
         else {
             Map<String, String> clients
             // Synchronize the Client List of the current device and the responder
-            clients = BloopRequestHandler.syncronizeClients(response.clients,  BloopListenerService.clients)
+            clients = BloopRequestHandler.syncronizeClients( response.clients, BloopListenerService.clients )
             // Update the device list
             BloopListenerService.clients = clients
             // Return the updated list to the responder

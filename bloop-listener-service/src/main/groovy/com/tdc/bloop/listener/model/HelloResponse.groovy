@@ -13,8 +13,8 @@ class HelloResponse extends Response {
             basicResponse( false, "Authentication Failed, Key Mismatch" )
         }
         // Check if client is already saved in client list
-        else if( BloopListenerService.clients.contains( request.ip) ) {
-            if(BloopListenerService.clients."${request.ip}" == request.macAddress) {
+        else if( BloopListenerService.clients.contains( request.ip ) ) {
+            if( BloopListenerService.clients."${ request.ip }" == request.macAddress ) {
                 basicResponse( false, "Hello Failed, Client Already Exists" )
             }
             else {
@@ -24,8 +24,8 @@ class HelloResponse extends Response {
         }
         else {
             // Save hello request info (IP and macs)
-            clients.put( request.ip, request.macAddress)
-            basicResponse( true, "Hello Request Successful", BloopRequestHandler.generateKey( request.key ))
+            clients.put( request.ip, request.macAddress )
+            basicResponse( true, "Hello Request Successful", BloopRequestHandler.generateKey( request.key ) )
         }
     }
 }

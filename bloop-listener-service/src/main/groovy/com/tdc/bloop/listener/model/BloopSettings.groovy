@@ -1,4 +1,4 @@
-package com.tdc.bloop.core
+package com.tdc.bloop.listener.model
 
 import groovy.transform.CompileStatic
 
