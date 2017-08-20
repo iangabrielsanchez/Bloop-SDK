@@ -5,7 +5,6 @@ import com.esotericsoftware.kryonet.Listener
 import com.tdc.bloop.listener.model.ClientListRequest
 import com.tdc.bloop.listener.model.ClientListResponse
 import com.tdc.bloop.listener.model.HelloRequest
-import com.tdc.bloop.listener.model.HelloResponse
 import com.tdc.bloop.listener.core.BloopListenerService
 import com.tdc.bloop.models.StringRequest
 

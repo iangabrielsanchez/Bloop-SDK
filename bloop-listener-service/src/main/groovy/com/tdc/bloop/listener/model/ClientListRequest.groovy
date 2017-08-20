@@ -17,7 +17,6 @@ class ClientListRequest extends Response{
     ClientListRequest( HelloResponse response ) {
         if( !response.succeeded ) {
             basicResponse( false, "Client List Request Failed, Hello Request Failed" )
-        }
         else {
             this.response( true, "Client List Request Successful" )
         }
