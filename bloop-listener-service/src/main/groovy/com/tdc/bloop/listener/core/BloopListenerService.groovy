@@ -55,6 +55,7 @@ class BloopListenerService {
         bloopServer = new BloopServer( bloopSettings )
         bloopClient = new BloopClient( bloopSettings )
         bloopServer.registerClasses(classes)
+        bloopClient.registerClasses( classes )
     }
 
     static void main( String[] args ) {
