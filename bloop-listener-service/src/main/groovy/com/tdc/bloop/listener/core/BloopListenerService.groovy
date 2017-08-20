@@ -1,6 +1,7 @@
 package com.tdc.bloop.listener.core
 
 import com.tdc.bloop.core.BloopSettings
+import com.tdc.bloop.listener.model.*
 import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
 
@@ -11,9 +12,14 @@ class BloopListenerService {
     static BloopSettings bloopSettings
 
     private static String settingsFilePath
+    private static Class[] classes = [
+        ClientListRequest.class,
+        ClientListResponse.class,
+        HelloRequest.class,
+        HelloResponse.class,
+        Response.class] as Class[];
 
-    static Map<String, String> clients = [];
-
+    static Map<String, String> clients = [ : ];
 
     void initialize() {
         //if path is not null,try to initialize, if fail or else, create file
@@ -48,6 +54,7 @@ class BloopListenerService {
         }
         bloopServer = new BloopServer( bloopSettings )
         bloopClient = new BloopClient( bloopSettings )
+        bloopServer.registerClasses(classes)
     }
 
     static void main( String[] args ) {

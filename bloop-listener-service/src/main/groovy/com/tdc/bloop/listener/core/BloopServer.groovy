@@ -50,7 +50,7 @@ class BloopServer extends Server {
      * @see <a href="https://github.com/EsotericSoftware/kryo">Kryo Serialization Library</a>
      * @param dataTypes The datatypes that need to be registered.
      */
-    void registerClasses( Class[] dataTypes ) {
+    void registerClasses( Class... dataTypes ) {
         BloopAuditor.registerClasses( this.kryo, dataTypes )
     }
 
