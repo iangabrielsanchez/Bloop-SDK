@@ -37,7 +37,7 @@ class BloopDefaultListeners extends Listener {
                 BloopListenerService.clients = ( ( ClientListResponse ) object ).clients
             }
         }
-        else {
+        else if( object instanceof String ) {
             println "RECEIVED: " + object.toString()
         }
     }

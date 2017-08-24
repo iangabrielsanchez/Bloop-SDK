@@ -32,7 +32,7 @@ class BloopServer extends Server {
     private void initializeComponents() {
         try {
             this.start()
-            this.bind( settings.hostPort )
+            this.bind( settings.tcpPort )
             BloopAuditor.registerClasses( this.kryo )
             this.addListener( new BloopDefaultListeners() )
             initialized = true

@@ -17,7 +17,7 @@ class BloopAuditor {
             ClientListResponse.class,
             HelloRequest.class,
             HelloResponse.class,
-            Response.class
+            Response.class,
     ]
 
     /**
@@ -44,18 +44,16 @@ class BloopAuditor {
     }
 
     static HostInformation getHostInformation() {
-
         Enumeration networkInterfaces = NetworkInterface.getNetworkInterfaces()
+        HostInformation information = new HostInformation()
 
         while( networkInterfaces.hasMoreElements() ) {
-
             NetworkInterface networkInterface = ( NetworkInterface ) networkInterfaces.nextElement()
             Enumeration networkAddresses = networkInterface.inetAddresses
             List<InterfaceAddress> addressList = networkInterface.interfaceAddresses
-            HostInformation information = new HostInformation()
 
-            while( networkAddresses.hasMoreElements() ) {
-
+            while( networkAddresses.hasMoreElements() && information.inetAddress == null ) {
+                information = new HostInformation()
                 InetAddress inetAddress = ( InetAddress ) networkAddresses.nextElement()
 
                 if( inetAddress.isSiteLocalAddress() ) {
@@ -65,12 +63,28 @@ class BloopAuditor {
                     for( InterfaceAddress address in addressList ) {
                         if( address.address instanceof Inet4Address ) {
                             information.networkPrefix = address.networkPrefixLength
+                            byte[] mac = information.networkInterface.getHardwareAddress()
+                            StringBuilder builder = StringBuilder.newInstance()
+                            for( int i = 0; i < mac.length; i++ ) {
+                                builder.append( String.format( "%02X%s", mac[ i ], ( i < mac.length - 1 ) ? "-" : "" ) )
+                            }
+                            information.macAddress = builder.toString()
+                            return information
                         }
                     }
-                    return information
                 }
             }
         }
+    }
+
+    static HelloRequest generateHelloRequest() {
+        HostInformation hostInfo = getHostInformation()
+        HelloRequest helloRequest = new HelloRequest(
+                hostIP: hostInfo.inetAddress.hostAddress,
+                macAddress: hostInfo.macAddress,
+                key: "jshdf",
+//                clients: []
+        )
     }
 
 }

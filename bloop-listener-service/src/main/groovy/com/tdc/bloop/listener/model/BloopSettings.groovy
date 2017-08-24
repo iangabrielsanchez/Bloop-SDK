@@ -13,7 +13,9 @@ import groovy.transform.CompileStatic
 class BloopSettings extends Object {
 
     int timeout
-    int hostPort
+    int tcpPort
+    int udpPort
+    int bufferSize
     String host
     String applicationName
     String applicationVersion
@@ -23,7 +25,9 @@ class BloopSettings extends Object {
      * The default values are:
      * <ul>
      * <li>timeout: 5000
-     * <li>hostPort: 25667
+     * <li>tcpPort: 25667
+     * <li>udpPort: 25668
+     * <li>bufferSize: 1024
      * <li>host: 'localhost'
      * <li>applicationName: 'BloopApplication'
      * <li>applicationVersion: '1.0.0'
@@ -31,7 +35,9 @@ class BloopSettings extends Object {
      */
     BloopSettings() {
         timeout = 5000
-        hostPort = 25667
+        tcpPort = 25667
+        udpPort = 25668
+        bufferSize = 1024
         host = 'localhost'
         applicationName = 'BloopApplication'
         applicationVersion = '1.0.0'
@@ -42,40 +48,18 @@ class BloopSettings extends Object {
      * @param applicationName The name of your application.
      * @param applicationVersion The version of your application
      * @param host The IP Address or Computer name of the host
-     * @param hostPort The port that will be used when the device is selected as a server
+     * @param tcpPort The port that will be used for the BloopServer
+     * @param udpPort The port that will be used for network discovery
      * @param timeout The timeout before the application decides that it's waiting too long
      */
-    BloopSettings( String applicationName, String applicationVersion, String host, int hostPort, int timeout ) {
+    BloopSettings( String applicationName, String applicationVersion, String host, int tcpPort, int udpPort, int timeout, int bufferSize ) {
         this.applicationName = applicationName
         this.applicationVersion = applicationVersion
         this.host = host
-        this.hostPort = hostPort
+        this.tcpPort = tcpPort
+        this.udpPort = udpPort
         this.timeout = timeout
-    }
-
-    BloopSettings withApplicationName( String applicationName ) {
-        this.applicationName = applicationName
-        return this
-    }
-
-    BloopSettings withApplicationVersion( String applicationVersion ) {
-        this.applicationVersion = applicationVersion
-        return this
-    }
-
-    BloopSettings withHost( String host ) {
-        this.host = host
-        return this
-    }
-
-    BloopSettings withHostPort( int hostPort ) {
-        this.hostPort = hostPort
-        return this
-    }
-
-    BloopSettings withTimeout( int timeout ) {
-        this.timeout = timeout
-        return this
+        this.bufferSize = bufferSize
     }
 
 }

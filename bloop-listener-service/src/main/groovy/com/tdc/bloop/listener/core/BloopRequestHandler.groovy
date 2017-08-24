@@ -17,7 +17,7 @@ class BloopRequestHandler {
 
     static boolean autenticate( String key ) {
         // Confirm hello key is from a legit listener
-        return true;
+        return true
     }
     // Check if Listener is Legit
     String generateKey( String key ) {

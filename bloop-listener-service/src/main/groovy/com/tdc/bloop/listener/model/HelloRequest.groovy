@@ -6,4 +6,5 @@ class HelloRequest {
     String macAddress
     String key
     Map<String, String> clients
+
 }
