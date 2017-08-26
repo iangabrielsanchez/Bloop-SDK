@@ -15,50 +15,50 @@ class BloopLogger {
 
     void error( String title, String description ) {
         LocalDateTime now = LocalDateTime.now()
-        String log = "${ now } [${ className }] ERROR: \"${ title }\" - ${ description }\n"
+        String log = "${ now } [${ className }] ERROR ${ title } - ${ description }"
         builder.append( log )
         System.err.println( log )
-        allLogs.append( log )
+        allLogs.append( log ).append( '\n' )
     }
 
     void error( String description ) {
         LocalDateTime now = LocalDateTime.now()
-        String log = "${ now } [${ className }] ERROR   ${ description }"
+        String log = "${ now } [${ className }] ERROR ${ description }"
         builder.append( log )
         System.err.println( log )
-        allLogs.append( log )
+        allLogs.append( log ).append( '\n' )
     }
 
     void warn( String title, String description ) {
         LocalDateTime now = LocalDateTime.now()
-        String log = "${ now } [${ className }] WARNING \"${ title }\" - ${ description }\n"
+        String log = "${ now } [${ className }] WARNING ${ title } - ${ description }"
         builder.append( log )
         System.out.println( log )
-        allLogs.append( log )
+        allLogs.append( log ).append( '\n' )
     }
 
     void warn( String description ) {
         LocalDateTime now = LocalDateTime.now()
-        String log = "${ now } [${ className }] WARNING ${ description }\n"
+        String log = "${ now } [${ className }] WARNING ${ description }"
         builder.append( log )
         System.out.println( log )
-        allLogs.append( log )
+        allLogs.append( log ).append( '\n' )
     }
 
     void log( String title, String description ) {
         LocalDateTime now = LocalDateTime.now()
-        String log = "${ now } [${ className }] LOG     \"${ title }\" - ${ description }\n"
+        String log = "${ now } [${ className }] LOG ${ title } - ${ description }"
         builder.append( log )
         System.out.println( log )
-        allLogs.append( log )
+        allLogs.append( log ).append( '\n' )
     }
 
     void log( String description ) {
         LocalDateTime now = LocalDateTime.now()
-        String log = "${ now } [${ className }] LOG     ${ description }\n"
+        String log = "${ now } [${ className }] LOG ${ description }"
         builder.append( log )
         System.out.println( log )
-        allLogs.append( log )
+        allLogs.append( log ).append( '\n' )
     }
 
 }

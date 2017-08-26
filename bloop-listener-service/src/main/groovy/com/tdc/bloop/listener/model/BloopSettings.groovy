@@ -16,8 +16,6 @@ class BloopSettings extends Object {
     int tcpPort
     int udpPort
     int bufferSize
-    String host
-    String applicationName
     String applicationVersion
 
     /**
@@ -28,8 +26,6 @@ class BloopSettings extends Object {
      * <li>tcpPort: 25667
      * <li>udpPort: 25668
      * <li>bufferSize: 1024
-     * <li>host: 'localhost'
-     * <li>applicationName: 'BloopApplication'
      * <li>applicationVersion: '1.0.0'
      * </ul>
      */
@@ -38,24 +34,19 @@ class BloopSettings extends Object {
         tcpPort = 25667
         udpPort = 25668
         bufferSize = 1024
-        host = 'localhost'
-        applicationName = 'BloopApplication'
         applicationVersion = '1.0.0'
     }
 
     /**
      * Creates a new instance of BloopSettings with the specified parameters
-     * @param applicationName The name of your application.
      * @param applicationVersion The version of your application
      * @param host The IP Address or Computer name of the host
      * @param tcpPort The port that will be used for the BloopServer
      * @param udpPort The port that will be used for network discovery
      * @param timeout The timeout before the application decides that it's waiting too long
      */
-    BloopSettings( String applicationName, String applicationVersion, String host, int tcpPort, int udpPort, int timeout, int bufferSize ) {
-        this.applicationName = applicationName
+    BloopSettings( String applicationVersion, int tcpPort, int udpPort, int timeout, int bufferSize ) {
         this.applicationVersion = applicationVersion
-        this.host = host
         this.tcpPort = tcpPort
         this.udpPort = udpPort
         this.timeout = timeout
