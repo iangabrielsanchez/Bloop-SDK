@@ -1,8 +1,8 @@
 package com.tdc.bloop.listener.core
 
 import com.esotericsoftware.kryonet.Server
-import com.tdc.bloop.core.BloopSettings
-import com.tdc.bloop.utilities.BloopAuditor
+import com.tdc.bloop.listener.model.BloopSettings
+import com.tdc.bloop.listener.utilities.BloopAuditor
 import groovy.transform.CompileStatic
 
 /**
@@ -32,10 +32,11 @@ class BloopServer extends Server {
     private void initializeComponents() {
         try {
             this.start()
-            this.bind( settings.hostPort )
+            this.bind( settings.tcpPort )
             BloopAuditor.registerClasses( this.kryo )
             this.addListener( new BloopDefaultListeners() )
             initialized = true
+            println "Bloop server is up"
         }
         catch( Exception ex ) {
             //TODO: Add exception logger
@@ -50,7 +51,7 @@ class BloopServer extends Server {
      * @see <a href="https://github.com/EsotericSoftware/kryo">Kryo Serialization Library</a>
      * @param dataTypes The datatypes that need to be registered.
      */
-    void registerClasses( Class... dataTypes ) {
+    void registerClasses( Class[] dataTypes ) {
         BloopAuditor.registerClasses( this.kryo, dataTypes )
     }
 

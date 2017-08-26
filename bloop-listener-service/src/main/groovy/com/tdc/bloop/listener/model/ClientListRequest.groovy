@@ -5,13 +5,14 @@ import com.tdc.bloop.listener.core.BloopListenerService
 /**
  * Created by tjako on 8/13/2017.
  */
-class ClientListRequest extends Response{
-    Map<String, String> clients = [:];
+class ClientListRequest extends Response {
+
+    Map<String, String> clients = [ : ]
 
     void response( boolean succeeded, String message ) {
         this.succeeded = succeeded
         this.message = message
-        this.clients = BloopListenerService.clients;
+        this.clients = BloopListenerService.clients
     }
 
     ClientListRequest( HelloResponse response ) {
