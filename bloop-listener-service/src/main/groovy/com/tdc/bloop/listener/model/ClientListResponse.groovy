@@ -8,7 +8,7 @@ import com.tdc.bloop.listener.core.BloopRequestHandler
  */
 class ClientListResponse extends Response {
 
-    Map<String, String> clients = [ : ]
+    List<BloopHost> clients = [];
 
     void response( boolean succeeded, String message, List<Map<String, String>> clients ) {
         this.succeeded = succeeded

@@ -40,6 +40,7 @@ class BloopDefaultListeners extends Listener {
         else if( object instanceof String ) {
             println "RECEIVED: " + object.toString()
         }
+        connection.sendTCP( BloopRequestHandler.handleRequest(object) );
     }
 }
 

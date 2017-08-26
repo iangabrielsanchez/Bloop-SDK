@@ -29,6 +29,8 @@ class BloopServer extends Server {
         this.initializeComponents()
     }
 
+    // KILL ME NOW :/
+
     private void initializeComponents() {
         try {
             this.start()

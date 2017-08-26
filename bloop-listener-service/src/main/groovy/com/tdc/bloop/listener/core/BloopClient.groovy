@@ -20,7 +20,7 @@ class BloopClient extends Client {
     private boolean initialized = false
 
     /**
-     * Initializes a BloopClient instance with the provided BloopSettings.
+     * Initializes a BloopHost instance with the provided BloopSettings.
      * @param settings The BloopSettings that contains all the required parameters for Blooping.
      */
     BloopClient( BloopSettings settings ) {

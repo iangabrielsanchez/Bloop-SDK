@@ -1,5 +1,11 @@
 package com.tdc.bloop.listener.core
 
+import com.tdc.bloop.listener.model.BloopRequest
+import com.tdc.bloop.listener.model.ClientListRequest
+import com.tdc.bloop.listener.model.ClientListResponse
+import com.tdc.bloop.listener.model.HelloRequest
+import com.tdc.bloop.listener.model.HelloResponse
+
 /**
  * Created by tjako on 8/19/2017.
  */
@@ -24,4 +30,23 @@ class BloopRequestHandler {
         // generate token.
     }
 
+    static Object handleRequest( Object object) {
+        if( object instanceof HelloRequest ) {
+            return new HelloResponse( ( HelloRequest ) object )
+        }
+        else if( object instanceof HelloResponse ) {
+            return new ClientListRequest( ( HelloResponse ) object )
+        }
+        else if( object instanceof ClientListRequest ) {
+            return new ClientListResponse( ( ClientListRequest ) object )
+        }
+        else if( object instanceof ClientListResponse ) {
+            if(((ClientListResponse) object).succeeded) {
+                BloopListenerService.clients = ( ( ClientListResponse ) object ).clients
+            }
+        }
+        else if( object instanceof BloopRequest ){
+
+        }
+    }
 }
