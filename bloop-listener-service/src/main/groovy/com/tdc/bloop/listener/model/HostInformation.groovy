@@ -5,11 +5,6 @@ class HostInformation {
     InetAddress inetAddress
     NetworkInterface networkInterface
     String macAddress
+    String signature
     int networkPrefix
-
-    String toString() {
-        return "inetAddress:${ inetAddress }\n" +
-                "networkInterface:${ networkInterface }\n" +
-                "networkPrefix:${ networkPrefix }"
-    }
 }

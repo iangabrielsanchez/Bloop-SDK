@@ -19,28 +19,7 @@ class BloopDefaultListeners extends Listener {
 
     @Override
     void received( Connection connection, Object object ) {
-        if( object instanceof HelloRequest ) {
-            println "RECEIVED: " + ( HelloRequest ) object
-            connection.sendTCP( new HelloResponse( ( HelloRequest ) object ) )
-        }
-        else if( object instanceof HelloResponse ) {
-            println "RECEIVED: " + ( HelloResponse ) object
-            connection.sendTCP( new ClientListRequest( ( HelloResponse ) object ) )
-        }
-        else if( object instanceof ClientListRequest ) {
-            println "RECEIVED: " + ( ClientListRequest ) object
-            connection.sendTCP( new ClientListResponse( ( ClientListRequest ) object ) )
-        }
-        else if( object instanceof ClientListResponse ) {
-            if( ( ( ClientListResponse ) object ).succeeded ) {
-                println "RECEIVED: " + ( ClientListRequest ) object
-                BloopListenerService.clients = ( ( ClientListResponse ) object ).clients
-            }
-        }
-        else if( object instanceof String ) {
-            println "RECEIVED: " + object.toString()
-        }
-        connection.sendTCP( BloopRequestHandler.handleRequest(object) );
+      connection.sendTCP( BloopRequestHandler.handleRequest(object) );
     }
 }
 

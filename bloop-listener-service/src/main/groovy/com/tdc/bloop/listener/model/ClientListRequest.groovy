@@ -6,9 +6,7 @@ import com.tdc.bloop.listener.core.BloopListenerService
  * Created by tjako on 8/13/2017.
  */
 class ClientListRequest extends Response{
-    List<BloopHost> clients = [];
-
-    Map<String, String> clients = [ : ]
+    List<HostInformation> clients = [];
 
     void response( boolean succeeded, String message ) {
         this.succeeded = succeeded
