@@ -62,8 +62,6 @@ class BloopListenerService {
         //Initialize server (everyone is a server)
         bloopServer = new BloopServer( bloopSettings )
         logger.log( 'BloopServer initialized' )
-        BloopAuditor.registerDefaultClasses( bloopServer.kryo )
-        logger.log( 'Registered default classes to kryo engine' )
 
         logger.log( "Broadcasting HelloRequest" )
         try {

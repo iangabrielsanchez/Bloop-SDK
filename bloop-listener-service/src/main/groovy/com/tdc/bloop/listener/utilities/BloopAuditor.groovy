@@ -19,6 +19,8 @@ class BloopAuditor {
             HelloRequest.class,
             HelloResponse.class,
             Response.class,
+            BloopLogger.class,
+            StringBuilder.class
     ]
 
     /**
@@ -89,8 +91,8 @@ class BloopAuditor {
     }
 
     static boolean compareVersion( String operation, String version1, String version2 ) {
-        String[] parts1 = version1.split( '-' )[ 0 ].split( '.' )
-        String[] parts2 = version2.split( '-' )[ 0 ].split( '.' )
+        String[] parts1 = version1.split( '-' )[ 0 ].split( '\\.' )
+        String[] parts2 = version2.split( '-' )[ 0 ].split( '\\.' )
         if( parts1.length != 3 || parts2.length != 3 ) {
             throw new Exception( "Invalid versioning" )
         }

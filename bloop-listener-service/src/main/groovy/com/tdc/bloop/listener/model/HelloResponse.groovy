@@ -10,30 +10,32 @@ import com.tdc.bloop.listener.utilities.BloopLogger
  */
 class HelloResponse extends Response {
 
-    private BloopLogger logger = new BloopLogger( this.class.getSimpleName() )
+//    private BloopLogger logger = new BloopLogger( this.class.getSimpleName() )
 
     boolean authorized
-    int bloopPort
+    Integer bloopPort
+
+    HelloResponse(){}
 
     HelloResponse( HelloRequest request ) {
-        if( !BloopRequestHandler.autenticate( request.key ) ) {
-            basicResponse( false, "Authentication Failed, Key Mismatch" )
-        }
-        // Check if client is already saved in client list
-        else if( BloopListenerService.clients.contains( request.ip ) ) {
-            if( BloopListenerService.clients."${ request.ip }" == request.macAddress ) {
-                basicResponse( false, "Hello Failed, Client Already Exists" )
-            }
-            else {
-                println( "IP Reissued" )
-                BloopListenerService.clients.remove( request.ip )
-            }
-        }
-        else {
-            // Save hello request info (IP and macs)
-            clients.put( request.ip, request.macAddress )
-            basicResponse( true, "Hello Request Successful", BloopRequestHandler.generateKey( request.key ) )
-        }
+//        if( !BloopRequestHandler.autenticate( request.key ) ) {
+//            basicResponse( false, "Authentication Failed, Key Mismatch" )
+//        }
+//        // Check if client is already saved in client list
+//        else if( BloopListenerService.clients.contains( request.ip ) ) {
+//            if( BloopListenerService.clients."${ request.ip }" == request.macAddress ) {
+//                basicResponse( false, "Hello Failed, Client Already Exists" )
+//            }
+//            else {
+//                println( "IP Reissued" )
+//                BloopListenerService.clients.remove( request.ip )
+//            }
+//        }
+//        else {
+//            // Save hello request info (IP and macs)
+//            clients.put( request.ip, request.macAddress )
+//            basicResponse( true, "Hello Request Successful", BloopRequestHandler.generateKey( request.key ) )
+//        }
 
         if( BloopAuditor.compareVersion( "<=", BloopListenerService.bloopSettings.applicationVersion, request.version ) ) {
             authorized = true
@@ -41,7 +43,7 @@ class HelloResponse extends Response {
         }
         else {
             authorized = false
+            bloopPort = null
         }
-
     }
 }

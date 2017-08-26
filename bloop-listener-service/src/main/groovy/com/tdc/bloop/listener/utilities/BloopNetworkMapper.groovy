@@ -5,6 +5,7 @@ import com.tdc.bloop.listener.core.BloopListenerService
 import com.tdc.bloop.listener.model.BloopSettings
 import com.tdc.bloop.listener.model.HelloRequest
 import com.tdc.bloop.listener.model.HelloResponse
+import groovy.json.JsonException
 import groovy.json.JsonSlurper
 
 class BloopNetworkMapper implements Runnable {
@@ -30,7 +31,7 @@ class BloopNetworkMapper implements Runnable {
         //I'm not really sure if this is required.
         //TODO: test if disabling this would affect the program
 //        socket.setBroadcast( true )
-        logger.log( "DatagramSocket setBroadcast is set to ${ socket.getBroadcast() }" )
+//        logger.log( "DatagramSocket setBroadcast is set to ${ socket.getBroadcast() }" )
 
         while( true ) {
             try {
@@ -47,26 +48,28 @@ class BloopNetworkMapper implements Runnable {
                 try {
                     Object parsedObject = new JsonSlurper().parse( buffer, "UTF-8" )
 
-                    if( parsedObject instanceof HelloRequest ) {
+//                    if( parsedObject instanceof HelloRequest ) {
+                    if( ( HelloRequest ) parsedObject ) {
+                        logger.log( "Received HelloRequest" )
                         //start new thread for authenticating
                         new Thread( new Runnable() {
 
                             @Override
                             void run() {
-
                                 HelloRequest received = ( HelloRequest ) parsedObject
                                 BloopClient client = new BloopClient( settings )
                                 HelloResponse response = new HelloResponse( received )
-
+                                logger.log( "Connecting to ${ received.hostIP }:${ received.bloopPort }..." )
                                 client.connect( settings.timeout, received.hostIP, received.bloopPort )
-
+                                logger.log( "Connected to ${ received.hostIP }:${ received.bloopPort }" )
+                                logger.log( "Sending BloopResponse" )
                                 client.sendTCP( response )
 
                             }
                         } ).run()
                     }
                 }
-                catch( Exception ex ) {
+                catch( JsonException ex ) {
                     logger.warn( 'Received object is not a valid JSON', ex.message )
                 }
             }
