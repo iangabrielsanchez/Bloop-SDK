@@ -1,5 +1,6 @@
 package com.tdc.bloop.listener.core
 
+import com.esotericsoftware.kryonet.Server
 import groovy.json.JsonSlurper
 import org.apache.commons.lang3.SystemUtils;
 
@@ -7,8 +8,11 @@ import org.apache.commons.lang3.SystemUtils;
  * Created by tjako on 8/20/2017.
  */
 class BloopIPC {
-    Pipe pipe
+    static Pipe pipe
 
+    void kryoIPC() {
+      // IAN
+    }
     void createPipe() {
         if(SystemUtils.IS_OS_WINDOWS) {
             pipe = new Pipe('writepipe', 'readpipe', 'windows')
@@ -30,8 +34,8 @@ class Pipe {
         readMessage()
     }
 
-    void sendMessage(String message) {
-        writer.write ( message.getBytes() )
+    void sendMessage(Object object) {
+        writer.write ( new JsonSlurper().parseText( object.toString() ).getBytes() )
     }
 
     void readMessage() {

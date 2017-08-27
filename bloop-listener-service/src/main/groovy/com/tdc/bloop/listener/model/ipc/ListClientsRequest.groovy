@@ -5,4 +5,6 @@ package com.tdc.bloop.listener.model.ipc
  */
 class ListClientsRequest {
     String filter
+    String applicationVersion
+    String applicationSignature
 }

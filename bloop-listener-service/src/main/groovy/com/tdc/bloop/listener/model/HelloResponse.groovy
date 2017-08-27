@@ -42,6 +42,5 @@ class HelloResponse extends Response {
         else {
             authorized = false
         }
-
     }
 }

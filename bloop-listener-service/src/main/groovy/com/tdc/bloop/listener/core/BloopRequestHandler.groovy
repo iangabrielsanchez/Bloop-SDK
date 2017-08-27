@@ -1,5 +1,6 @@
 package com.tdc.bloop.listener.core
 
+import com.tdc.bloop.listener.model.HostInformation
 import com.tdc.bloop.listener.model.ipc.BloopRequest
 import com.tdc.bloop.listener.model.ipc.BloopResponse
 import com.tdc.bloop.listener.model.ClientListRequest
@@ -12,13 +13,8 @@ import com.tdc.bloop.listener.model.HelloResponse
  */
 class BloopRequestHandler {
 
-    Map<String, String> synchronizeClients( Map<String, String> list, Map<String, String> list2 ) {
-        if( !list.contains( client ) ) {
-            list.add( client )
-        }
-        if( !list2.contains( client ) ) {
-            list.add( client )
-        }
+    Map<String, HostInformation> synchronizeClients(  Map<String, HostInformation> list,  Map<String, HostInformation> list2 ) {
+
         list
     }
 
