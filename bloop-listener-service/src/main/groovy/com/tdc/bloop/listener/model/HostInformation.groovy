@@ -6,10 +6,6 @@ class HostInformation {
     NetworkInterface networkInterface
     String macAddress
     int networkPrefix
+    int bloopPort
 
-    String toString() {
-        return "inetAddress:${ inetAddress }\n" +
-                "networkInterface:${ networkInterface }\n" +
-                "networkPrefix:${ networkPrefix }"
-    }
 }

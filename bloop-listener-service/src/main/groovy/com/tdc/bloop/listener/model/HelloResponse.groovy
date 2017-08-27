@@ -1,47 +1,53 @@
 package com.tdc.bloop.listener.model
 
 import com.tdc.bloop.listener.core.BloopListenerService
-import com.tdc.bloop.listener.core.BloopRequestHandler
+import com.tdc.bloop.listener.core.HelloStatus
 import com.tdc.bloop.listener.utilities.BloopAuditor
-import com.tdc.bloop.listener.utilities.BloopLogger
-
+import com.tdc.bloop.listener.utilities.BloopSecurity
 /**
  * Created by tjako on 8/13/2017.
  */
 class HelloResponse extends Response {
 
-    private BloopLogger logger = new BloopLogger( this.class.getSimpleName() )
+//    private BloopLogger logger = new BloopLogger( this.class.getSimpleName() )
 
-    boolean authorized
-    int bloopPort
+    HelloStatus status
+    Client client
+
+    HelloResponse() {}
 
     HelloResponse( HelloRequest request ) {
-        if( !BloopRequestHandler.autenticate( request.key ) ) {
-            basicResponse( false, "Authentication Failed, Key Mismatch" )
-        }
-        // Check if client is already saved in client list
-        else if( BloopListenerService.clients.contains( request.ip ) ) {
-            if( BloopListenerService.clients."${ request.ip }" == request.macAddress ) {
-                basicResponse( false, "Hello Failed, Client Already Exists" )
+        if( BloopAuditor.compareVersion( "<=", BloopListenerService.bloopSettings.listenerVersion, request.version ) ) {
+            if( !BloopListenerService.clients.containsKey( request.hostIP ) ) {
+                BloopListenerService.clients.put( request.hostIP,
+                        new Client(
+                                hostIP: request.hostIP,
+                                macAddress: request.macAddress,
+                                bloopPort: request.bloopPort,
+                                version: request.version,
+                                key: null
+                        )
+                )
+                status = HelloStatus.AUTHORIZED
+                HostInformation hostInformation = BloopAuditor.getHostInformation()
+                client = new Client(
+                        hostIP: hostInformation.getInetAddress().getHostAddress(),
+                        macAddress: hostInformation.getMacAddress(),
+                        bloopPort: BloopListenerService.bloopSettings.tcpPort,
+                        version: BloopListenerService.bloopSettings.listenerVersion,
+                        key: BloopSecurity.generateRandomKey()
+                )
+            }
+            else if( BloopListenerService.clients[ request.hostIP ].macAddres == request.macAddress ) {
+                status = HelloStatus.ALREADY_EXISTS
             }
             else {
-                println( "IP Reissued" )
-                BloopListenerService.clients.remove( request.ip )
+                status = HelloStatus.MAC_MISMATCH
+                BloopListenerService.clients.remove( request.hostIP )
             }
         }
         else {
-            // Save hello request info (IP and macs)
-            clients.put( request.ip, request.macAddress )
-            basicResponse( true, "Hello Request Successful", BloopRequestHandler.generateKey( request.key ) )
+            status = HelloStatus.VERSION_MISMATCH
         }
-
-        if( BloopAuditor.compareVersion( "<=", BloopListenerService.bloopSettings.applicationVersion, request.version ) ) {
-            authorized = true
-            bloopPort = BloopListenerService.bloopSettings.tcpPort
-        }
-        else {
-            authorized = false
-        }
-
     }
 }

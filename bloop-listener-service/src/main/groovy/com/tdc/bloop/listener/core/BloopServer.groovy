@@ -33,7 +33,7 @@ class BloopServer extends Server {
         try {
             this.start()
             this.bind( settings.tcpPort )
-            BloopAuditor.registerClasses( this.kryo )
+            BloopAuditor.registerDefaultClasses( this.kryo )
             this.addListener( new BloopDefaultListeners() )
             initialized = true
             println "Bloop server is up"

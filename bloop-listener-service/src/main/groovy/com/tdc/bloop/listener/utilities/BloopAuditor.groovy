@@ -2,6 +2,7 @@ package com.tdc.bloop.listener.utilities
 
 import com.esotericsoftware.kryo.Kryo
 import com.tdc.bloop.listener.core.BloopListenerService
+import com.tdc.bloop.listener.core.HelloStatus
 import com.tdc.bloop.listener.model.*
 import groovy.transform.CompileStatic
 /**
@@ -19,6 +20,11 @@ class BloopAuditor {
             HelloRequest.class,
             HelloResponse.class,
             Response.class,
+            BloopLogger.class,
+            StringBuilder.class,
+            HelloStatus.class,
+            Client.class,
+            HelloThanks
     ]
 
     /**
@@ -70,6 +76,7 @@ class BloopAuditor {
                                 builder.append( String.format( "%02X%s", mac[ i ], ( i < mac.length - 1 ) ? "-" : "" ) )
                             }
                             information.macAddress = builder.toString()
+                            information.bloopPort = BloopListenerService.bloopSettings.tcpPort
                             return information
                         }
                     }
@@ -84,13 +91,13 @@ class BloopAuditor {
                 hostIP: hostInfo.inetAddress.hostAddress,
                 bloopPort: BloopListenerService.bloopSettings.tcpPort,
                 macAddress: hostInfo.macAddress,
-                version: BloopListenerService.bloopSettings.applicationVersion
+                version: BloopListenerService.bloopSettings.listenerVersion
         )
     }
 
     static boolean compareVersion( String operation, String version1, String version2 ) {
-        String[] parts1 = version1.split( '-' )[ 0 ].split( '.' )
-        String[] parts2 = version2.split( '-' )[ 0 ].split( '.' )
+        String[] parts1 = version1.split( '-' )[ 0 ].split( '\\.' )
+        String[] parts2 = version2.split( '-' )[ 0 ].split( '\\.' )
         if( parts1.length != 3 || parts2.length != 3 ) {
             throw new Exception( "Invalid versioning" )
         }
@@ -175,6 +182,10 @@ class BloopAuditor {
                 }
                 return false
         }
+    }
+
+    static boolean withinVersion(String version1, String version2){
+
     }
 
 }

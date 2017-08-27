@@ -33,7 +33,7 @@ class BloopClient extends Client {
         try {
             this.start()
             //this.connect( settings.timeout, settings.host, settings.tcpPort )
-            BloopAuditor.registerClasses( this.kryo )
+            BloopAuditor.registerDefaultClasses( this.kryo )
             this.addListener( new BloopDefaultListeners() )
             initialized = true
         }

@@ -1,7 +1,9 @@
 package com.tdc.bloop.listener.core
 
 import com.tdc.bloop.listener.model.BloopSettings
+import com.tdc.bloop.listener.model.Client
 import com.tdc.bloop.listener.model.HelloRequest
+import com.tdc.bloop.listener.model.HostInformation
 import com.tdc.bloop.listener.utilities.BloopAuditor
 import com.tdc.bloop.listener.utilities.BloopLogger
 import com.tdc.bloop.listener.utilities.BloopNetworkMapper
@@ -13,9 +15,8 @@ class BloopListenerService {
     BloopLogger logger = new BloopLogger( this.class.getSimpleName() )
 
     static BloopServer bloopServer
-    static BloopClient bloopClient
     static BloopSettings bloopSettings
-    static Map<String, String> clients = [ : ]
+    static Map<String, Client> clients = [ : ]
 
     private static Thread discovery
     private static File settingFile
@@ -56,14 +57,12 @@ class BloopListenerService {
             }
         }
         catch( Exception ex ) {
-            logger.error( "Unexpected error occurred.", ex2.message )
+            logger.error( "Unexpected error occurred.", ex.message )
         }
 
-        //Initialize server (everyone is a server)
+        //Initialize server
         bloopServer = new BloopServer( bloopSettings )
         logger.log( 'BloopServer initialized' )
-        BloopAuditor.registerDefaultClasses( bloopServer.kryo )
-        logger.log( 'Registered default classes to kryo engine' )
 
         logger.log( "Broadcasting HelloRequest" )
         try {
