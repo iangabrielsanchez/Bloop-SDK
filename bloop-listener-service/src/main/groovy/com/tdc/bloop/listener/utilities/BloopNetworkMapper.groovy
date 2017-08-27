@@ -74,7 +74,8 @@ class BloopNetworkMapper implements Runnable {
                 }
             }
             catch( Exception ex ) {
-                logger.error( 'Unexpected error occured.', ex.message )
+                logger.error( 'Unexpected error occured.', ex.message)
+                ex.printStackTrace(  )
             }
         }
     }

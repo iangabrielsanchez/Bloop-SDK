@@ -1,5 +1,6 @@
 package com.tdc.bloop.listener.utilities
 
+import org.apache.commons.text.RandomStringGenerator
 import sun.misc.BASE64Decoder
 import sun.misc.BASE64Encoder
 
@@ -46,6 +47,11 @@ class BloopSecurity {
     private static Key generateKey( String keyValue ) throws Exception {
         byte[] bytes = keyValue.getBytes()
         return new SecretKeySpec( bytes, ALGO )
+    }
+
+    static String generateRandomKey() {
+        RandomStringGenerator generator = RandomStringGenerator.Builder.newInstance().withinRange( 33, 126 ).build()
+        return generator.generate( 16 )
     }
 
 }

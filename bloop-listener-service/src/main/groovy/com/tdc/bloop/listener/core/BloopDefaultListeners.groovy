@@ -3,6 +3,7 @@ package com.tdc.bloop.listener.core
 import com.esotericsoftware.kryonet.Connection
 import com.esotericsoftware.kryonet.Listener
 import com.tdc.bloop.listener.model.*
+import com.tdc.bloop.listener.utilities.BloopLogger
 import groovy.transform.CompileStatic
 /**
  * Contains all the default bloop listeners. This determines
@@ -14,22 +15,28 @@ import groovy.transform.CompileStatic
 @CompileStatic
 class BloopDefaultListeners extends Listener {
 
+    private BloopLogger logger = new BloopLogger( this.class.getSimpleName() )
+
     @Override
     void received( Connection connection, Object object ) {
 
         println connection.getRemoteAddressTCP().getHostName()
 
         if( object instanceof HelloRequest ) {
-            println "RECEIVED: " + ( HelloRequest ) object
+            logger.log( "Received HelloRequest" )
             connection.sendTCP( new HelloResponse( ( HelloRequest ) object ) )
+            logger.log( "Sent HelloResponse" )
         }
         else if( object instanceof HelloResponse ) {
-            println "RECEIVED: " + ( HelloResponse ) object
-//            connection.sendTCP( new ClientListRequest( ( HelloResponse ) object ) )
-//            connection.sendTCP( new HelloThanks( ( HelloResponse ) object ) )
+            logger.log( "Received HelloResponse" )
+            connection.sendTCP( new HelloThanks( ( HelloResponse ) object ) )
+            logger.log( "Sent HelloThanks" )
         }
         else if( object instanceof HelloThanks ) {
-//            connection.sendTCP( new Hello)
+            if( BloopListenerService.clients.containsKey( ( ( HelloThanks ) object ).hostIP ) ) {
+                BloopListenerService.clients.get( ( ( HelloThanks ) object ).hostIP ).key = ( ( HelloThanks ) object ).key
+                logger.log( "Added Key" )
+            }
         }
         else if( object instanceof ClientListRequest ) {
             println "RECEIVED: " + ( ClientListRequest ) object

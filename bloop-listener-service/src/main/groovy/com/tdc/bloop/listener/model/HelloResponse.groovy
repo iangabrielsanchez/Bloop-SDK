@@ -3,9 +3,7 @@ package com.tdc.bloop.listener.model
 import com.tdc.bloop.listener.core.BloopListenerService
 import com.tdc.bloop.listener.core.HelloStatus
 import com.tdc.bloop.listener.utilities.BloopAuditor
-import org.apache.commons.text.RandomStringGenerator
-
-import javax.crypto.KeyGenerator
+import com.tdc.bloop.listener.utilities.BloopSecurity
 /**
  * Created by tjako on 8/13/2017.
  */
@@ -13,30 +11,41 @@ class HelloResponse extends Response {
 
 //    private BloopLogger logger = new BloopLogger( this.class.getSimpleName() )
 
-    boolean authorized
-    Integer bloopPort
-    String key
     HelloStatus status
-
-//    Map<String, HostInformation> clientList
+    Client client
 
     HelloResponse() {}
 
     HelloResponse( HelloRequest request ) {
-        authorized = false
         bloopPort = null
         key = null
         if( BloopAuditor.compareVersion( "<=", BloopListenerService.bloopSettings.listenerVersion, request.version ) ) {
-            if( BloopListenerService.clients[ request.hostIP ].macAddres == request.macAddress ) {
-                authorized = true
-                bloopPort = BloopListenerService.bloopSettings.tcpPort
-                clientList = BloopListenerService.clients
-                RandomStringGenerator generator = RandomStringGenerator.Builder.newInstance().withinRange( 33, 126 ).build()
-                key = generator.generate( 16 )
+            if( !BloopListenerService.clients.containsKey( request.hostIP ) ) {
+                BloopListenerService.clients.put( request.hostIP,
+                        new Client(
+                                hostIP: request.hostIP,
+                                macAddress: request.macAddress,
+                                bloopPort: request.bloopPort,
+                                version: request.version,
+                                key: null
+                        )
+                )
                 status = HelloStatus.AUTHORIZED
+                HostInformation hostInformation = BloopAuditor.getHostInformation()
+                client = new Client(
+                        hostIP: hostInformation.getInetAddress().getHostAddress(),
+                        macAddress: hostInformation.getMacAddress(),
+                        bloopPort: BloopListenerService.bloopSettings.tcpPort,
+                        version: BloopListenerService.bloopSettings.listenerVersion,
+                        key: BloopSecurity.generateRandomKey()
+                )
+            }
+            else if( BloopListenerService.clients[ request.hostIP ].macAddres == request.macAddress ) {
+                status = HelloStatus.ALREADY_EXISTS
             }
             else {
                 status = HelloStatus.MAC_MISMATCH
+                BloopListenerService.clients.remove( request.hostIP )
             }
         }
         else {

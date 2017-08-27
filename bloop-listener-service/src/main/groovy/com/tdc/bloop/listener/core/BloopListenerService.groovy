@@ -1,6 +1,7 @@
 package com.tdc.bloop.listener.core
 
 import com.tdc.bloop.listener.model.BloopSettings
+import com.tdc.bloop.listener.model.Client
 import com.tdc.bloop.listener.model.HelloRequest
 import com.tdc.bloop.listener.model.HostInformation
 import com.tdc.bloop.listener.utilities.BloopAuditor
@@ -15,7 +16,7 @@ class BloopListenerService {
 
     static BloopServer bloopServer
     static BloopSettings bloopSettings
-    static Map<String, HostInformation> clients = [ : ]
+    static Map<String, Client> clients = [ : ]
 
     private static Thread discovery
     private static File settingFile
