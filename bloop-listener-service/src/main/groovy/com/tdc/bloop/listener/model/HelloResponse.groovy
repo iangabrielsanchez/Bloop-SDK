@@ -17,7 +17,6 @@ class HelloResponse extends Response {
     HelloResponse() {}
 
     HelloResponse( HelloRequest request ) {
-        key = null
         if( BloopAuditor.compareVersion( "<=", BloopListenerService.bloopSettings.listenerVersion, request.version ) ) {
             if( !BloopListenerService.clients.containsKey( request.hostIP ) ) {
                 BloopListenerService.clients.put( request.hostIP,
