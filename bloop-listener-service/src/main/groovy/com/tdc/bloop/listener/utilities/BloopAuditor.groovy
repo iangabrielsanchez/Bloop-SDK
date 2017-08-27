@@ -23,7 +23,8 @@ class BloopAuditor {
             BloopLogger.class,
             StringBuilder.class,
             HelloStatus.class,
-            Client.class
+            Client.class,
+            HelloThanks
     ]
 
     /**
