@@ -33,9 +33,11 @@ class BloopDefaultListeners extends Listener {
             logger.log( "Sent HelloThanks" )
         }
         else if( object instanceof HelloThanks ) {
+            logger.log( "Received HelloThanks" )
             if( BloopListenerService.clients.containsKey( ( ( HelloThanks ) object ).hostIP ) ) {
                 BloopListenerService.clients.get( ( ( HelloThanks ) object ).hostIP ).key = ( ( HelloThanks ) object ).key
                 logger.log( "Added Key" )
+                connection.close()
             }
         }
         else if( object instanceof ClientListRequest ) {

@@ -11,6 +11,8 @@ class HelloThanks {
     String key
     String hostIP
 
+    HelloThanks(){}
+
     HelloThanks( HelloResponse response ) {
         BloopLogger logger = new BloopLogger( this.class.getSimpleName() )
         if( response.status == HelloStatus.AUTHORIZED ) {

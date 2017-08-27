@@ -64,7 +64,6 @@ class BloopNetworkMapper implements Runnable {
                                 logger.log( "Connected to ${ received.hostIP }:${ received.bloopPort }" )
                                 logger.log( "Sending HelloResponse" )
                                 client.sendTCP( response )
-                                client.stop()
                             }
                         } ).run()
                     }
