@@ -2,6 +2,6 @@
     "timeout": 5000,
     "udpPort": 25668,
     "bufferSize": 1024,
-    "tcpPort": 25667,
-    "applicationVersion": "1.0.0"
+    "listenerVersion": "1.0.0",
+    "tcpPort": 25667
 }
