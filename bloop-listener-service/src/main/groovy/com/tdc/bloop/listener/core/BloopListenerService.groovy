@@ -28,40 +28,7 @@ class BloopListenerService {
         logger.log( 'Initializing BloopListener' )
         //initialize settings
         //if path is not null,try to initialize, if fail or else, create file
-        try {
-            settingFile = new File( System.getProperty( "user.dir" ), "BloopSettings.json" )
-            StringBuilder json = StringBuilder.newInstance()
-            Scanner fileReader = new Scanner( settingFile )
-            while( fileReader.hasNextLine() ) {
-                json.append( fileReader.nextLine() )
-            }
-            bloopSettings = ( BloopSettings ) new JsonSlurper().parseText( json.toString() )
-        }
-        catch( FileNotFoundException ex ) {
-            logger.error( "BloopSettings.json not found.", "Generating from default settings." )
-            try {
-
-                if( settingFile.createNewFile() ) {
-                    FileWriter writer = new FileWriter( settingFile, true )
-                    BufferedWriter bufferedWriter = new BufferedWriter( writer )
-                    bufferedWriter.write( new JsonBuilder( new BloopSettings() ).toPrettyString() )
-                    bufferedWriter.flush()
-                    bufferedWriter.close()
-                    Scanner fileReader = new Scanner( settingFile )
-                    StringBuilder json = StringBuilder.newInstance()
-                    while( fileReader.hasNextLine() ) {
-                        json.append( fileReader.nextLine() )
-                    }
-                    bloopSettings = ( BloopSettings ) new JsonSlurper().parseText( json.toString() )
-                }
-            }
-            catch( Exception ex2 ) {
-                logger.error( 'Failed to create BloopSettings.json', ex2.message )
-            }
-        }
-        catch( Exception ex ) {
-            logger.error( "Unexpected error occurred.", ex.message )
-        }
+        bloopSettings = loadBloopSettings()
 
         //Initialize server
         bloopServer = new BloopServer( bloopSettings )
@@ -95,6 +62,46 @@ class BloopListenerService {
         ipcServer = new Server()
         ipcServer.start()
         ipcServer.bind( bloopSettings.ipcPort )
+    }
+
+    static BloopSettings loadBloopSettings() {
+        BloopLogger logger = new BloopLogger( this.class.getSimpleName() )
+        try {
+            settingFile = new File( System.getProperty( "user.dir" ), "BloopSettings.json" )
+            StringBuilder json = StringBuilder.newInstance()
+            Scanner fileReader = new Scanner( settingFile )
+            while( fileReader.hasNextLine() ) {
+                json.append( fileReader.nextLine() )
+            }
+            fileReader.close()
+            return ( BloopSettings ) new JsonSlurper().parseText( json.toString() )
+        }
+        catch( FileNotFoundException ex ) {
+            logger.error( "BloopSettings.json not found.", "Generating from default settings." )
+            try {
+
+                if( settingFile.createNewFile() ) {
+                    FileWriter writer = new FileWriter( settingFile, true )
+                    BufferedWriter bufferedWriter = new BufferedWriter( writer )
+                    bufferedWriter.write( new JsonBuilder( new BloopSettings() ).toPrettyString() )
+                    bufferedWriter.flush()
+                    bufferedWriter.close()
+                    Scanner fileReader = new Scanner( settingFile )
+                    StringBuilder json = StringBuilder.newInstance()
+                    while( fileReader.hasNextLine() ) {
+                        json.append( fileReader.nextLine() )
+                    }
+                    fileReader.close()
+                    return ( BloopSettings ) new JsonSlurper().parseText( json.toString() )
+                }
+            }
+            catch( Exception ex2 ) {
+                logger.error( 'Failed to create BloopSettings.json', ex2.message )
+            }
+        }
+        catch( Exception ex ) {
+            logger.error( "Unexpected error occurred.", ex.message )
+        }
     }
 
     static void main( String[] args ) {

@@ -11,7 +11,7 @@ class HelloThanks {
     String key
     String hostIP
 
-    HelloThanks(){}
+    HelloThanks() {}
 
     HelloThanks( HelloResponse response ) {
         BloopLogger logger = new BloopLogger( this.class.getSimpleName() )

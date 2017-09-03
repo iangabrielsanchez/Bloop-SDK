@@ -1,4 +1,4 @@
-package com.tdc.bloop.listener.ipc
+package com.tdc.bloop.listener.core
 
 enum BloopIPCStatus {
 

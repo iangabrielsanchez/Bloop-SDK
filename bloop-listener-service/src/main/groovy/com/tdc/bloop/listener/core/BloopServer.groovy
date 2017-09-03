@@ -2,11 +2,8 @@ package com.tdc.bloop.listener.core
 
 import com.esotericsoftware.kryonet.JsonSerialization
 import com.esotericsoftware.kryonet.Server
-import com.esotericsoftware.minlog.Log
 import com.tdc.bloop.listener.model.BloopSettings
-import com.tdc.bloop.listener.utilities.BloopAuditor
 import groovy.transform.CompileStatic
-
 /**
  * Represents the server that the BloopClients will connect to.
  * The Bloop Listener Service automatically identifies if the current
@@ -27,7 +24,7 @@ class BloopServer extends Server {
      */
     BloopServer( BloopSettings settings ) {
         //super()
-        super(16384,2048, new JsonSerialization())
+        super( 16384, 2048, new JsonSerialization() )
 //        Log.set( Log.LEVEL_NONE )
         this.settings = settings
         this.initializeComponents()
@@ -37,7 +34,6 @@ class BloopServer extends Server {
         try {
             this.start()
             this.bind( settings.tcpPort )
-//            BloopAuditor.registerDefaultClasses( this.kryo )
             this.addListener( new BloopDefaultListeners() )
             initialized = true
             println "Bloop server is up"
@@ -46,17 +42,6 @@ class BloopServer extends Server {
             //TODO: Add exception logger
             initialized = false
         }
-    }
-
-    /**
-     * Classes that are going to be sent over the network should be first registered
-     * on both client and server. This allows them to be serialized by the
-     * Kryo Serialization Library
-     * @see <a href="https://github.com/EsotericSoftware/kryo">Kryo Serialization Library</a>
-     * @param dataTypes The datatypes that need to be registered.
-     */
-    void registerClasses( Class[] dataTypes ) {
-        BloopAuditor.registerClasses( this.kryo, dataTypes )
     }
 
     /**

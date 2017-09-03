@@ -6,16 +6,34 @@
 
     <groupId>com.tdc</groupId>
     <artifactId>bloop-api</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <version>1.0.0-SNAPSHOT</version>
+
+    <name>Bloop API</name>
+    <url>https://github.com/TheDarkCorner/Bloop-API</url>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/TheDarkCorner/Bloop-API</url>
+        <connection>scm:git:https://github.com/TheDarkCorner/Bloop-API.git</connection>
+        <developerConnection>scm:git:https://github.com/TheDarkCorner/Bloop-API.git</developerConnection>
+        <tag>HEAD</tag>
+
+    </scm>
+
     <modules>
         <module>bloop-api-core</module>
         <module>bloop-listener-service</module>
-        <module>bloop-listener-gui</module>
     </modules>
 
     <dependencies>
-
         <!-- https://mvnrepository.com/artifact/com.esotericsoftware/kryonet -->
         <!-- https://github.com/EsotericSoftware/kryonet -->
         <dependency>
@@ -24,7 +42,43 @@
             <version>2.22.0-RC1</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>RELEASE</version>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <links>
+                        <link>
+                            <href>http://docs.oracle.com/javase/8/docs/api/</href>
+                            <packages>java.,org.xml.,javax.,org.xml.</packages>
+                        </link>
+                        <link>
+                            <href>http://fasterxml.github.io/jackson-databind/javadoc/2.5/</href>
+                            <packages>com.fasterxml.jackson.</packages>
+                        </link>
+                        <!-- add links to any other javadocs where possible -->
+                    </links>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>

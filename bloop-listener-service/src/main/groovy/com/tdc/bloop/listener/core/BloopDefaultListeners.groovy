@@ -2,7 +2,9 @@ package com.tdc.bloop.listener.core
 
 import com.esotericsoftware.kryonet.Connection
 import com.esotericsoftware.kryonet.Listener
-import com.tdc.bloop.listener.model.*
+import com.tdc.bloop.listener.model.HelloRequest
+import com.tdc.bloop.listener.model.HelloResponse
+import com.tdc.bloop.listener.model.HelloThanks
 import com.tdc.bloop.listener.utilities.BloopLogger
 import groovy.transform.CompileStatic
 /**
@@ -38,19 +40,6 @@ class BloopDefaultListeners extends Listener {
             connection.close()
 //            }
         }
-        else if( object instanceof ClientListRequest ) {
-            println "RECEIVED: " + ( ClientListRequest ) object
-            connection.sendTCP( new ClientListResponse( ( ClientListRequest ) object ) )
-        }
-        else if( object instanceof ClientListResponse ) {
-            if( ( ( ClientListResponse ) object ).succeeded ) {
-//                println "RECEIVED: " + ( ClientListRequest ) object
-//                BloopListenerService.clients = ( ( ClientListResponse ) object ).clients
-            }
-        }
-//        else if( object instanceof String ) {
-//            println "RECEIVED: " + object.toString()
-//        }
     }
 }
 

@@ -2,10 +2,9 @@ package com.tdc.bloop.listener.core
 
 import com.esotericsoftware.kryonet.Client
 import com.esotericsoftware.kryonet.JsonSerialization
+import com.tdc.bloop.listener.exception.BloopException
 import com.tdc.bloop.listener.model.BloopSettings
-import com.tdc.bloop.listener.utilities.BloopAuditor
 import groovy.transform.CompileStatic
-
 /**
  * Represents the client that is connected to the BloopServer.
  * The Bloop Listener Service automatically identifies if the current
@@ -18,7 +17,7 @@ import groovy.transform.CompileStatic
 class BloopClient extends Client {
 
     BloopSettings settings
-    private boolean initialized = false
+    String host
 
     /**
      * Initializes a BloopClient instance with the provided BloopSettings.
@@ -26,7 +25,7 @@ class BloopClient extends Client {
      */
     BloopClient( BloopSettings settings ) {
         //super()
-        super(16384,2048, new JsonSerialization())
+        super( 16384, 2048, new JsonSerialization() )
         this.settings = settings
         initializeComponents()
     }
@@ -35,31 +34,22 @@ class BloopClient extends Client {
         try {
             this.start()
             this.addListener( new BloopDefaultListeners() )
-            initialized = true
         }
         catch( Exception ex ) {
             //TODO: Add exception logger.
-            initialized = false
         }
     }
 
-    /**
-     * Classes that are going to be sent over the network should be first registered
-     * on both client and server. This allows them to be serialized by the
-     * Kryo Serialization Library
-     * @see <a href="https://github.com/EsotericSoftware/kryo">Kryo Serialization Library</a>
-     * @param dataTypes The datatypes that need to be registered.
-     */
-    void registerClasses( Class[] dataTypes ) {
-        BloopAuditor.registerClasses( this.kryo, dataTypes )
+    BloopClient withHost(String host){
+        this.host = host
+        return this
     }
 
-    /**
-     * Checks if the current BloopServer instance is initialized.
-     * @return The initialized status of the BloopServer
-     */
-    boolean isInitialized() {
-        return initialized
+    void connect() throws BloopException {
+        if( host == null ) {
+            throw new BloopException( "Field host is not initialized" )
+        }
+        connect( settings.timeout, host, settings.tcpPort )
     }
 
 }
