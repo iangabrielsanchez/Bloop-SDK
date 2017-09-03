@@ -38,7 +38,7 @@ class HelloResponse extends Response {
                         key: BloopSecurity.generateRandomKey()
                 )
             }
-            else if( BloopListenerService.clients[ request.hostIP ].macAddres == request.macAddress ) {
+            else if( BloopListenerService.clients[ request.hostIP ].macAddress == request.macAddress ) {
                 status = HelloStatus.ALREADY_EXISTS
             }
             else {

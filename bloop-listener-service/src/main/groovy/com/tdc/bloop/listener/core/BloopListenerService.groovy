@@ -1,9 +1,10 @@
 package com.tdc.bloop.listener.core
 
+import com.esotericsoftware.kryonet.Server
+import com.tdc.bloop.listener.model.BloopApplication
 import com.tdc.bloop.listener.model.BloopSettings
 import com.tdc.bloop.listener.model.Client
 import com.tdc.bloop.listener.model.HelloRequest
-import com.tdc.bloop.listener.model.HostInformation
 import com.tdc.bloop.listener.utilities.BloopAuditor
 import com.tdc.bloop.listener.utilities.BloopLogger
 import com.tdc.bloop.listener.utilities.BloopNetworkMapper
@@ -16,7 +17,9 @@ class BloopListenerService {
 
     static BloopServer bloopServer
     static BloopSettings bloopSettings
+    static Server ipcServer
     static Map<String, Client> clients = [ : ]
+    static Map<String, BloopApplication> applications
 
     private static Thread discovery
     private static File settingFile
@@ -66,10 +69,11 @@ class BloopListenerService {
 
         logger.log( "Broadcasting HelloRequest" )
         try {
-            HelloRequest hello = BloopAuditor.generateHelloRequest(  )
+            HelloRequest hello = BloopAuditor.generateHelloRequest()
             String message = new JsonBuilder( hello ).toString()
             InetAddress broadcastAddress = InetAddress.getByName( "255.255.255.255" )
             new DatagramSocket().send( new DatagramPacket( message.getBytes(), message.length(), broadcastAddress, bloopSettings.udpPort ) )
+            logger.log( "Broadcast Successful" )
         }
         catch( Exception ex ) {
             logger.error( "UDP Broadcast Failed", ex.message )
@@ -83,29 +87,17 @@ class BloopListenerService {
         )
         logger.log( 'Starting NetworkMapper' )
         discovery.run()
-        //Start thread for host discovery;
 
-//        if( !isServer ) {
-//            bloopClient = new BloopClient( bloopSettings )
-//            println "Client is connecting to bloopServer"
-//            bloopClient.connect(
-//                    bloopClient.settings.timeout,
-//                    bloopClient.settings.host,
-//                    bloopClient.settings.tcpPort
-//            )
-//            BloopAuditor.registerDefaultClasses( bloopClient.kryo )
-//        }
-//        else {
-//            println "Initializing bloop server"
-//            bloopServer = new BloopServer( bloopSettings )
-//            BloopAuditor.registerDefaultClasses( bloopServer.kryo )
-//        }
-
+//        initializeIPCServer()
     }
-    static boolean isServer = true
+
+    void initializeIPCServer() {
+        ipcServer = new Server()
+        ipcServer.start()
+        ipcServer.bind( bloopSettings.ipcPort )
+    }
 
     static void main( String[] args ) {
         new BloopListenerService().initialize()
     }
-
 }

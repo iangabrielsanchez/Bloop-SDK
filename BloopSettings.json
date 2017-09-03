@@ -1,6 +1,7 @@
 {
     "timeout": 5000,
-    "udpPort": 4427,
+    "ipcPort": 25666,
+    "udpPort": 25668,
     "bufferSize": 1024,
     "listenerVersion": "1.0.0",
     "tcpPort": 25667

@@ -1,6 +1,7 @@
 package com.tdc.bloop.listener.core
 
 import com.esotericsoftware.kryonet.Client
+import com.esotericsoftware.kryonet.JsonSerialization
 import com.tdc.bloop.listener.model.BloopSettings
 import com.tdc.bloop.listener.utilities.BloopAuditor
 import groovy.transform.CompileStatic
@@ -24,7 +25,8 @@ class BloopClient extends Client {
      * @param settings The BloopSettings that contains all the required parameters for Blooping.
      */
     BloopClient( BloopSettings settings ) {
-        super()
+        //super()
+        super(16384,2048, new JsonSerialization())
         this.settings = settings
         initializeComponents()
     }
@@ -32,8 +34,6 @@ class BloopClient extends Client {
     private void initializeComponents() {
         try {
             this.start()
-            //this.connect( settings.timeout, settings.host, settings.tcpPort )
-            BloopAuditor.registerDefaultClasses( this.kryo )
             this.addListener( new BloopDefaultListeners() )
             initialized = true
         }

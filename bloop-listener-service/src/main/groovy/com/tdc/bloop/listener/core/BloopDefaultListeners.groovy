@@ -20,8 +20,6 @@ class BloopDefaultListeners extends Listener {
     @Override
     void received( Connection connection, Object object ) {
 
-        println connection.getRemoteAddressTCP().getHostName()
-
         if( object instanceof HelloRequest ) {
             logger.log( "Received HelloRequest" )
             connection.sendTCP( new HelloResponse( ( HelloRequest ) object ) )
@@ -34,11 +32,11 @@ class BloopDefaultListeners extends Listener {
         }
         else if( object instanceof HelloThanks ) {
             logger.log( "Received HelloThanks" )
-            if( BloopListenerService.clients.containsKey( ( ( HelloThanks ) object ).hostIP ) ) {
-                BloopListenerService.clients.get( ( ( HelloThanks ) object ).hostIP ).key = ( ( HelloThanks ) object ).key
-                logger.log( "Added Key" )
-                connection.close()
-            }
+//            if( BloopListenerService.clients.containsKey( ( ( HelloThanks ) object ).hostIP ) ) {
+            BloopListenerService.clients.get( ( ( HelloThanks ) object ).hostIP ).key = ( ( HelloThanks ) object ).key
+            logger.log( "Added Key" )
+            connection.close()
+//            }
         }
         else if( object instanceof ClientListRequest ) {
             println "RECEIVED: " + ( ClientListRequest ) object
@@ -50,9 +48,9 @@ class BloopDefaultListeners extends Listener {
 //                BloopListenerService.clients = ( ( ClientListResponse ) object ).clients
             }
         }
-        else if( object instanceof String ) {
-            println "RECEIVED: " + object.toString()
-        }
+//        else if( object instanceof String ) {
+//            println "RECEIVED: " + object.toString()
+//        }
     }
 }
 
