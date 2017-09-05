@@ -1,7 +1,5 @@
 package com.tdc.bloop.listener.core
 
-import com.esotericsoftware.jsonbeans.Json
-import com.esotericsoftware.jsonbeans.OutputType
 import com.tdc.bloop.model.BloopApplication
 import groovy.json.JsonSlurper
 

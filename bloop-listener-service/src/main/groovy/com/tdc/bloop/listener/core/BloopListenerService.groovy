@@ -1,6 +1,5 @@
 package com.tdc.bloop.listener.core
 
-import com.esotericsoftware.kryonet.Server
 import com.tdc.bloop.listener.utilities.BloopAuditor
 import com.tdc.bloop.listener.utilities.BloopLogger
 import com.tdc.bloop.listener.utilities.BloopNetworkMapper
@@ -61,7 +60,7 @@ class BloopListenerService {
         )
         logger.log( 'Starting NetworkMapper' )
         discovery.run()
-        
+
         bloopServer.addListener( new BloopIPCListener() )
     }
 

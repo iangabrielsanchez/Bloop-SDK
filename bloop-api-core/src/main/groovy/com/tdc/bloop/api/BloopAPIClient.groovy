@@ -51,7 +51,7 @@ class BloopAPIClient implements BloopAPI {
                     if( Duration.between( start, check ).getNano() >= request.timeout * 1000000 ) {
                         bloopClient.close()
                         result = new BloopResponse(
-                                requestStatus: RequestStatus.CONNECTION_TIMEOUT
+                                description: "Connection Timed out"
                         )
                         break
                     }
