@@ -1,9 +1,9 @@
-package com.tdc.bloop
+package com.tdc.bloop.api
 
 import com.tdc.bloop.listener.core.BloopClient
 import com.tdc.bloop.listener.core.BloopListenerService
-import com.tdc.bloop.listener.model.BloopSettings
 import com.tdc.bloop.listener.utilities.BloopLogger
+import com.tdc.bloop.model.BloopSettings
 
 class BloopAPIClientBuilder {
 

@@ -1,5 +1,6 @@
-package com.tdc.bloop
+package com.tdc.bloop.api
 
 interface BloopResultListener {
+
     boolean bloopExecuted()
 }

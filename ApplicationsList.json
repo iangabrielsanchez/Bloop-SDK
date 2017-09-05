@@ -1,0 +1,23 @@
+{
+  "Args": {
+    "class": "com.tdc.bloop.model.BloopApplication",
+    "applicationVersion": "1.0.0",
+    "command": "groovy",
+    "applicationPath": "C:\\Users\\ianga\\Desktop\\Args.groovy",
+    "applicationName": "Args"
+  },
+  "Args2": {
+    "class": "com.tdc.bloop.model.BloopApplication",
+    "applicationVersion": "1.0.0",
+    "command": "groovy",
+    "applicationPath": "C:\\Users\\ianga\\Desktop\\Args.groovy",
+    "applicationName": "Args2"
+  },
+  "Lucky9": {
+    "class": "com.tdc.bloop.model.BloopApplication",
+    "applicationVersion": "1.0.0",
+    "command": "java -jar",
+    "applicationPath": "C:\\Users\\ianga\\Desktop\\Lucky9\\dist\\Lucky9.jar",
+    "applicationName": "Args2"
+  }
+}

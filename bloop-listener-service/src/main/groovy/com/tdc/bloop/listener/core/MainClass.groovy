@@ -1,20 +1,28 @@
 package com.tdc.bloop.listener.core
 
-import com.tdc.bloop.listener.utilities.BloopSecurity
-import org.apache.commons.text.RandomStringGenerator
+import com.esotericsoftware.jsonbeans.Json
+import com.esotericsoftware.jsonbeans.OutputType
+import com.tdc.bloop.model.BloopApplication
+import groovy.json.JsonSlurper
 
 class MainClass {
 
     static void main( String[] args ) {
+        Map<String, BloopApplication> bloopApplicationMap = new HashMap<>()
+        File appList
+        try {
+            appList = new File( System.getProperty( "user.dir" ), "ApplicationsList.json" )
+            bloopApplicationMap = ( Map<String, BloopApplication> ) new JsonSlurper().parse( appList )
+        }
+        catch( Exception ex ) {
+            //something occured
+        }
 
-        RandomStringGenerator generator = RandomStringGenerator.Builder.newInstance().withinRange( 33, 126 ).build()
-        String key = generator.generate( 16 )
-        String encr = BloopSecurity.encrypt( "{\"hostIP\":\"192.168.2.125\",\"bloopPort\":25667,\"version\":\"1.0.0\",\"macAddress\":\"4C-0 F-6E-43-F1-74\"}", key )
-        println encr
 
-        println "\n\n"
-
-        println BloopSecurity.decrypt( encr, key )
-
+        String command = bloopApplicationMap[ "Lucky9" ].command
+        String path = bloopApplicationMap[ "Lucky9" ].applicationPath
+        String params = ""
+        println "Starting program..."
+        new ProcessBuilder( "cmd", "/k", command, path, params ).start()
     }
 }

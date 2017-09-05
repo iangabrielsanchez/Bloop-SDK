@@ -1,8 +1,7 @@
-package com.tdc.bloop
+package com.tdc.bloop.api
 
+enum RequestStatus {
 
-
-enum BloopRequestStatus {
     SUCCESSFUL,
     VERSION_MISMATCH,
     APPLICATION_MISSING,

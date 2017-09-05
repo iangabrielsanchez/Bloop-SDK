@@ -1,10 +1,10 @@
 package com.tdc.bloop.model
 
-import com.tdc.bloop.BloopRequestStatus
+import com.tdc.bloop.api.RequestStatus
 
 class BloopResult {
 
-    BloopRequestStatus requestStatus
-
+    RequestStatus requestStatus
+    String description
 
 }

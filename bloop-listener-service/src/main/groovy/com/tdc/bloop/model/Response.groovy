@@ -1,4 +1,4 @@
-package com.tdc.bloop.listener.model
+package com.tdc.bloop.model
 
 /**
  * Created by tjako on 8/13/2017.

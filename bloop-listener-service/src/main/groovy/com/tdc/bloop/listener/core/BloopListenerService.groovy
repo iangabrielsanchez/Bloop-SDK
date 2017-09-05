@@ -1,13 +1,13 @@
 package com.tdc.bloop.listener.core
 
 import com.esotericsoftware.kryonet.Server
-import com.tdc.bloop.listener.model.BloopApplication
-import com.tdc.bloop.listener.model.BloopSettings
-import com.tdc.bloop.listener.model.Client
-import com.tdc.bloop.listener.model.HelloRequest
 import com.tdc.bloop.listener.utilities.BloopAuditor
 import com.tdc.bloop.listener.utilities.BloopLogger
 import com.tdc.bloop.listener.utilities.BloopNetworkMapper
+import com.tdc.bloop.model.BloopApplication
+import com.tdc.bloop.model.BloopSettings
+import com.tdc.bloop.model.Client
+import com.tdc.bloop.model.HelloRequest
 import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
 
@@ -17,7 +17,6 @@ class BloopListenerService {
 
     static BloopServer bloopServer
     static BloopSettings bloopSettings
-    static Server ipcServer
     static Map<String, Client> clients = [ : ]
     static Map<String, BloopApplication> applications
 
@@ -29,6 +28,14 @@ class BloopListenerService {
         //initialize settings
         //if path is not null,try to initialize, if fail or else, create file
         bloopSettings = loadBloopSettings()
+        try {
+            applications = ( Map<String, BloopApplication> ) new JsonSlurper().parse(
+                    new File( System.getProperty( "user.dir" ), "ApplicationsList.json" )
+            )
+        }
+        catch( Exception ex ) {
+            logger.error( "Unexpected error occurred", ex.message )
+        }
 
         //Initialize server
         bloopServer = new BloopServer( bloopSettings )
@@ -54,27 +61,15 @@ class BloopListenerService {
         )
         logger.log( 'Starting NetworkMapper' )
         discovery.run()
-
-//        initializeIPCServer()
-    }
-
-    void initializeIPCServer() {
-        ipcServer = new Server()
-        ipcServer.start()
-        ipcServer.bind( bloopSettings.ipcPort )
+        
+        bloopServer.addListener( new BloopIPCListener() )
     }
 
     static BloopSettings loadBloopSettings() {
         BloopLogger logger = new BloopLogger( this.class.getSimpleName() )
         try {
             settingFile = new File( System.getProperty( "user.dir" ), "BloopSettings.json" )
-            StringBuilder json = StringBuilder.newInstance()
-            Scanner fileReader = new Scanner( settingFile )
-            while( fileReader.hasNextLine() ) {
-                json.append( fileReader.nextLine() )
-            }
-            fileReader.close()
-            return ( BloopSettings ) new JsonSlurper().parseText( json.toString() )
+            return ( BloopSettings ) new JsonSlurper().parse( settingFile )
         }
         catch( FileNotFoundException ex ) {
             logger.error( "BloopSettings.json not found.", "Generating from default settings." )

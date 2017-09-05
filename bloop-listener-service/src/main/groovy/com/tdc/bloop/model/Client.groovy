@@ -1,4 +1,4 @@
-package com.tdc.bloop.listener.model
+package com.tdc.bloop.model
 
 class Client {
 

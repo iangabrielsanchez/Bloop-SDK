@@ -2,10 +2,10 @@ package com.tdc.bloop.listener.core
 
 import com.esotericsoftware.kryonet.Connection
 import com.esotericsoftware.kryonet.Listener
-import com.tdc.bloop.listener.model.HelloRequest
-import com.tdc.bloop.listener.model.HelloResponse
-import com.tdc.bloop.listener.model.HelloThanks
 import com.tdc.bloop.listener.utilities.BloopLogger
+import com.tdc.bloop.model.HelloRequest
+import com.tdc.bloop.model.HelloResponse
+import com.tdc.bloop.model.HelloThanks
 import groovy.transform.CompileStatic
 /**
  * Contains all the default bloop listeners. This determines

@@ -3,7 +3,7 @@ package com.tdc.bloop.listener.core
 import com.esotericsoftware.kryonet.Client
 import com.esotericsoftware.kryonet.JsonSerialization
 import com.tdc.bloop.listener.exception.BloopException
-import com.tdc.bloop.listener.model.BloopSettings
+import com.tdc.bloop.model.BloopSettings
 import groovy.transform.CompileStatic
 /**
  * Represents the client that is connected to the BloopServer.
@@ -40,7 +40,7 @@ class BloopClient extends Client {
         }
     }
 
-    BloopClient withHost(String host){
+    BloopClient withHost( String host ) {
         this.host = host
         return this
     }

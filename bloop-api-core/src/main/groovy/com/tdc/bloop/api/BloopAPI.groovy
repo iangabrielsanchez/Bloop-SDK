@@ -1,4 +1,4 @@
-package com.tdc.bloop
+package com.tdc.bloop.api
 
 import com.tdc.bloop.model.BloopHostRequest
 import com.tdc.bloop.model.BloopHosts
@@ -11,6 +11,8 @@ interface BloopAPI {
 
     Future<BloopResult> bloop( BloopRequest request )
 
-    BloopHosts listBloopHosts( BloopHostRequest request )
+    Future<BloopHosts> listBloopHosts( BloopHostRequest request )
+
+    //will add more features after i finish the listener
 
 }

@@ -2,7 +2,7 @@ package com.tdc.bloop.listener.core
 
 import com.esotericsoftware.kryonet.JsonSerialization
 import com.esotericsoftware.kryonet.Server
-import com.tdc.bloop.listener.model.BloopSettings
+import com.tdc.bloop.model.BloopSettings
 import groovy.transform.CompileStatic
 /**
  * Represents the server that the BloopClients will connect to.

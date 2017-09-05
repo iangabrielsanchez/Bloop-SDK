@@ -1,8 +1,8 @@
 package com.tdc.bloop.listener.utilities
 
 import com.tdc.bloop.listener.core.BloopListenerService
-import com.tdc.bloop.listener.model.HelloRequest
-import com.tdc.bloop.listener.model.HostInformation
+import com.tdc.bloop.model.HelloRequest
+import com.tdc.bloop.model.HostInformation
 import groovy.transform.CompileStatic
 /**
  * This class contains all the methods required for auditing all BloopTransactions.
