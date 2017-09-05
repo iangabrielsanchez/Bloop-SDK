@@ -1,10 +1,12 @@
 package com.tdc.bloop.listener.core
 
-import com.esotericsoftware.jsonbeans.Json
 import com.esotericsoftware.kryonet.Connection
 import com.esotericsoftware.kryonet.Listener
 import com.tdc.bloop.listener.utilities.BloopLogger
-import com.tdc.bloop.model.*
+import com.tdc.bloop.model.BloopExecuteRequest
+import com.tdc.bloop.model.BloopExecuteResponse
+import com.tdc.bloop.model.BloopRequest
+import com.tdc.bloop.model.BloopResponse
 import groovy.transform.CompileStatic
 /**
  * Contains all the default bloop listeners. This determines
@@ -13,7 +15,7 @@ import groovy.transform.CompileStatic
  * @since 1.0
  * @author Ian Gabriel Sanchez
  */
-@CompileStatic
+
 class BloopIPCListener extends Listener {
 
     private BloopLogger logger = new BloopLogger( this.class.getSimpleName() )
@@ -25,8 +27,9 @@ class BloopIPCListener extends Listener {
     void received( Connection connection, Object object ) {
         if( object instanceof BloopRequest ) {
             if( BloopListenerService.applications.containsKey( ( ( BloopRequest ) object ).applicationName ) ) {
-                BloopApplication app = BloopListenerService.applications.get( ( ( BloopRequest ) object ).applicationName )
-                if( app.applicationVersion == ( ( BloopRequest ) object ).applicationVersion ) {
+                println BloopListenerService.applications.get( ( ( BloopRequest ) object ).applicationName ).class
+                String version = BloopListenerService.applications[ ( ( BloopRequest ) object ).applicationName ].applicationVersion
+                if( version == ( ( BloopRequest ) object ).applicationVersion ) {
                     BloopClient client = new BloopClient( BloopListenerService.bloopSettings )
                     client.withHost( ( ( BloopRequest ) object ).targetHost ).connect()
                     client.sendTCP( new BloopExecuteRequest(
@@ -43,7 +46,7 @@ class BloopIPCListener extends Listener {
             new ProcessBuilder( "cmd", "/k",
                     BloopListenerService.applications[ ( ( BloopExecuteRequest ) object ).applicationName ].command,
                     BloopListenerService.applications[ ( ( BloopExecuteRequest ) object ).applicationName ].applicationPath,
-                    (( BloopExecuteRequest ) object ).bloopObject
+                    ( ( BloopExecuteRequest ) object ).bloopObject
             ).start()
             connection.sendTCP( new BloopExecuteResponse(
                     status: BloopIPCStatus.ALLOWED,

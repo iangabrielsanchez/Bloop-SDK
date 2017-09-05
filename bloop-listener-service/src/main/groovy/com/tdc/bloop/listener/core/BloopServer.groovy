@@ -35,6 +35,7 @@ class BloopServer extends Server {
             this.start()
             this.bind( settings.tcpPort )
             this.addListener( new BloopDefaultListeners() )
+            this.addListener( new BloopIPCListener() )
             initialized = true
             println "Bloop server is up"
         }

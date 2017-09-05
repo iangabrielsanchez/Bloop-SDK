@@ -17,7 +17,7 @@ class BloopListenerService {
     static BloopServer bloopServer
     static BloopSettings bloopSettings
     static Map<String, Client> clients = [ : ]
-    static Map<String, BloopApplication> applications
+    static Map applications = [ : ]
 
     private static Thread discovery
     private static File settingFile
@@ -28,7 +28,7 @@ class BloopListenerService {
         //if path is not null,try to initialize, if fail or else, create file
         bloopSettings = loadBloopSettings()
         try {
-            applications = ( Map<String, BloopApplication> ) new JsonSlurper().parse(
+            applications = new JsonSlurper().parse(
                     new File( System.getProperty( "user.dir" ), "ApplicationsList.json" )
             )
         }
@@ -60,8 +60,9 @@ class BloopListenerService {
         )
         logger.log( 'Starting NetworkMapper' )
         discovery.run()
-
-        bloopServer.addListener( new BloopIPCListener() )
+//        logger.log( "Adding BloopIPCListener" )
+//        bloopServer.addListener( new BloopIPCListener() )
+//        logger.log( "Adding BloopIPCListener done" )
     }
 
     static BloopSettings loadBloopSettings() {
