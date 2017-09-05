@@ -4,6 +4,6 @@ class BloopApplication {
 
     String applicationName
     String applicationVersion
-    String applicationPath
+    String applicationDir
     String command
 }

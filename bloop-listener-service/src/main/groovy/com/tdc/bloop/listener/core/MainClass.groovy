@@ -17,11 +17,17 @@ class MainClass {
             //something occured
         }
 
+        String app = "Lucky9"
 
-        String command = bloopApplicationMap[ "Lucky9" ].command
-        String path = bloopApplicationMap[ "Lucky9" ].applicationPath
+        String command = bloopApplicationMap[ app ].command
+        String path = bloopApplicationMap[ app ].applicationDir
         String params = ""
+        String drive = path.split( ":" )[ 0 ]
+        String name = bloopApplicationMap[ app ].applicationName
         println "Starting program..."
+
+        new ProcessBuilder( "cmd", "/k", drive + ":&&cd ${ path }&&", command, name, params ).start()
         new ProcessBuilder( "cmd", "/k", command, path, params ).start()
+
     }
 }

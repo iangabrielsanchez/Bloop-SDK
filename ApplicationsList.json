@@ -3,14 +3,14 @@
     "class": "com.tdc.bloop.model.BloopApplication",
     "applicationVersion": "1.0.0",
     "command": "java",
-    "applicationPath": "D:\\Compressed\\Test-Cases\\Code-Text Editor\\target\\classes\\TextEditor",
+    "applicationDir": "D:\\Compressed\\Test-Cases\\Code-Text Editor\\target\\classes\\",
     "applicationName": "TextEditor"
   },
   "Lucky9": {
     "class": "com.tdc.bloop.model.BloopApplication",
     "applicationVersion": "1.0.0",
     "command": "java -jar",
-    "applicationPath": "C:\\Users\\ianga\\Desktop\\Lucky9\\dist\\Lucky9.jar",
-    "applicationName": "Args2"
+    "applicationDir": "C:\\Users\\ianga\\Desktop\\Lucky9\\dist\\",
+    "applicationName": "Lucky 9.jar"
   }
 }

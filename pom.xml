@@ -31,6 +31,7 @@
     <modules>
         <module>bloop-api-core</module>
         <module>bloop-listener-service</module>
+        <module>bloop-tester</module>
     </modules>
 
     <dependencies>

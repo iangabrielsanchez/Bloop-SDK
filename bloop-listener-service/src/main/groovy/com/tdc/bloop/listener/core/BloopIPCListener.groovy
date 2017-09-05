@@ -7,7 +7,7 @@ import com.tdc.bloop.model.BloopExecuteRequest
 import com.tdc.bloop.model.BloopExecuteResponse
 import com.tdc.bloop.model.BloopRequest
 import com.tdc.bloop.model.BloopResponse
-import groovy.transform.CompileStatic
+import org.apache.commons.lang3.StringEscapeUtils
 /**
  * Contains all the default bloop listeners. This determines
  * what should happen to a request depending on its type.
@@ -43,11 +43,17 @@ class BloopIPCListener extends Listener {
             }
         }
         else if( object instanceof BloopExecuteRequest ) {
-            new ProcessBuilder( "cmd", "/k",
-                    BloopListenerService.applications[ ( ( BloopExecuteRequest ) object ).applicationName ].command,
-                    BloopListenerService.applications[ ( ( BloopExecuteRequest ) object ).applicationName ].applicationPath,
-                    ( ( BloopExecuteRequest ) object ).bloopObject
-            ).start()
+            String command = BloopListenerService.applications[ ( ( BloopExecuteRequest ) object ).applicationName ].command
+            String path = BloopListenerService.applications[ ( ( BloopExecuteRequest ) object ).applicationName ].applicationPath
+            String param = StringEscapeUtils.escapeJava( ( ( BloopExecuteRequest ) object ).bloopObject )
+
+            if( command.contains( "jar" ) ) {
+                new ProcessBuilder( "cmd", "/k", command, path, param ).toString()
+            }
+            else {
+                new ProcessBuilder( "cmd", "/k", drive + ":&&cd ${ path }&&", command, name, params ).start()
+            }
+
             connection.sendTCP( new BloopExecuteResponse(
                     status: BloopIPCStatus.ALLOWED,
                     description: "BloopSuccessful",
