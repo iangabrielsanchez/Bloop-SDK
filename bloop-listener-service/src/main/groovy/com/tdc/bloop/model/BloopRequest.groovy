@@ -5,7 +5,7 @@ class BloopRequest {
     String targetHost
     String applicationName
     String applicationVersion
-    Object bloopObject
+    String bloopObject
     int timeout
 
 }

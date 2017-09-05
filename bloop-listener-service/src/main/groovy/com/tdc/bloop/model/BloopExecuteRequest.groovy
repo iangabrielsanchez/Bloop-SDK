@@ -5,6 +5,6 @@ class BloopExecuteRequest {
     String applicationName
     String applicationVersion
     String command
-    Object bloopObject
+    String bloopObject
     int connectionID
 }

@@ -6,6 +6,7 @@ import groovy.json.JsonSlurper
 class MainClass {
 
     static void main( String[] args ) {
+
         Map<String, BloopApplication> bloopApplicationMap = new HashMap<>()
         File appList
         try {

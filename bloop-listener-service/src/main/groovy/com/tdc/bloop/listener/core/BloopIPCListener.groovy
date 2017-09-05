@@ -43,7 +43,7 @@ class BloopIPCListener extends Listener {
             new ProcessBuilder( "cmd", "/k",
                     BloopListenerService.applications[ ( ( BloopExecuteRequest ) object ).applicationName ].command,
                     BloopListenerService.applications[ ( ( BloopExecuteRequest ) object ).applicationName ].applicationPath,
-                    new Json().toJson( ( ( BloopExecuteRequest ) object ).bloopObject )
+                    (( BloopExecuteRequest ) object ).bloopObject
             ).start()
             connection.sendTCP( new BloopExecuteResponse(
                     status: BloopIPCStatus.ALLOWED,
