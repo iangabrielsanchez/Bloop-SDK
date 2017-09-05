@@ -1,17 +1,10 @@
 {
-  "Args": {
+  "TextEditor": {
     "class": "com.tdc.bloop.model.BloopApplication",
     "applicationVersion": "1.0.0",
-    "command": "groovy",
-    "applicationPath": "C:\\Users\\ianga\\Desktop\\Args.groovy",
-    "applicationName": "Args"
-  },
-  "Args2": {
-    "class": "com.tdc.bloop.model.BloopApplication",
-    "applicationVersion": "1.0.0",
-    "command": "groovy",
-    "applicationPath": "C:\\Users\\ianga\\Desktop\\Args.groovy",
-    "applicationName": "Args2"
+    "command": "java",
+    "applicationPath": "D:\\Compressed\\Test-Cases\\Code-Text Editor\\target\\classes\\TextEditor",
+    "applicationName": "TextEditor"
   },
   "Lucky9": {
     "class": "com.tdc.bloop.model.BloopApplication",
