@@ -17,7 +17,7 @@ class BloopListenerService {
     static BloopServer bloopServer
     static BloopSettings bloopSettings
     static Map<String, Client> clients = [ : ]
-    static Map applications = [ : ]
+    static Map<String, BloopApplication> applications = [ : ]
 
     private static Thread discovery
     private static File settingFile
@@ -39,9 +39,9 @@ class BloopListenerService {
         //Initialize server
         bloopServer = new BloopServer( bloopSettings )
         logger.log( 'BloopServer initialized' )
-
         logger.log( "Broadcasting HelloRequest" )
         try {
+
             HelloRequest hello = BloopAuditor.generateHelloRequest()
             String message = new JsonBuilder( hello ).toString()
             InetAddress broadcastAddress = InetAddress.getByName( "255.255.255.255" )

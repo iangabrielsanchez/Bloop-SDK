@@ -3,7 +3,7 @@
     "class": "com.tdc.bloop.model.BloopApplication",
     "applicationVersion": "1.0.0",
     "command": "java",
-    "applicationDir": "D:\\Compressed\\Test-Cases\\Code-Text Editor\\target\\classes\\",
+    "applicationDir": "D:\\Test_Cases\\Code-Text-Editor\\target\\classes\\",
     "applicationName": "TextEditor"
   },
   "Lucky9": {
@@ -12,5 +12,12 @@
     "command": "java -jar",
     "applicationDir": "C:\\Users\\ianga\\Desktop\\Lucky9\\dist\\",
     "applicationName": "Lucky 9.jar"
+  },
+  "Game": {
+    "class": "com.tdc.bloop.model.BloopApplication",
+    "applicationVersion": "1.1",
+    "command": "java",
+    "applicationDir": "D:\\Test_Cases\\Wave-Game-Build\\target\\classes\\",
+    "applicationName": "Game"
   }
 }

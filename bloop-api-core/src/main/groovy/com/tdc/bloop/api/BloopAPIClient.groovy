@@ -41,6 +41,7 @@ class BloopAPIClient implements BloopAPI {
         bloopClient.sendTCP( request )
 
         ExecutorService executor = Executors.newSingleThreadExecutor()
+
         return executor.submit( new GroovyCallable<BloopResponse>() {
 
             @Override
