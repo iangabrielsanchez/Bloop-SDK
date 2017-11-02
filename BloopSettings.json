@@ -1,5 +1,5 @@
 {
-  "timeout": 5000,
+  "timeout": 10000,
   "ipcPort": 25666,
   "udpPort": 25668,
   "bufferSize": 1024,
