@@ -18,6 +18,7 @@ class BloopListenerService {
     static BloopSettings bloopSettings
     static Map<String, Client> clients = [ : ]
     static Map<String, BloopApplication> applications = [ : ]
+    static boolean secured = false
 
     private static Thread discovery
     private static File settingFile
