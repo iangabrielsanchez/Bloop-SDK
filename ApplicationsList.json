@@ -2,9 +2,9 @@
   "TextEditor": {
     "class": "com.tdc.bloop.model.BloopApplication",
     "applicationVersion": "1.0.0",
-    "command": "java",
-    "applicationDir": "D:\\Test_Cases\\Code-Text-Editor\\target\\classes\\",
-    "applicationName": "TextEditor"
+    "command": "java -jar",
+    "applicationDir": "C:\\",
+    "applicationName": "TextEditor.jar"
   },
   "Lucky9": {
     "class": "com.tdc.bloop.model.BloopApplication",
