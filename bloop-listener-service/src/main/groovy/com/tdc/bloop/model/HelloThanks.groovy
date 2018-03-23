@@ -1,4 +1,4 @@
-package com.tdc.bloop.listener.model
+package com.tdc.bloop.model
 
 import com.tdc.bloop.listener.core.BloopListenerService
 import com.tdc.bloop.listener.core.HelloStatus
@@ -11,7 +11,7 @@ class HelloThanks {
     String key
     String hostIP
 
-    HelloThanks(){}
+    HelloThanks() {}
 
     HelloThanks( HelloResponse response ) {
         BloopLogger logger = new BloopLogger( this.class.getSimpleName() )

@@ -1,0 +1,23 @@
+{
+  "TextEditor": {
+    "class": "com.tdc.bloop.model.BloopApplication",
+    "applicationVersion": "1.0.0",
+    "command": "java -jar",
+    "applicationDir": "C:\\",
+    "applicationName": "TextEditor.jar"
+  },
+  "Lucky9": {
+    "class": "com.tdc.bloop.model.BloopApplication",
+    "applicationVersion": "1.0.0",
+    "command": "java -jar",
+    "applicationDir": "C:\\Users\\ianga\\Desktop\\Lucky9\\dist\\",
+    "applicationName": "Lucky 9.jar"
+  },
+  "Game": {
+    "class": "com.tdc.bloop.model.BloopApplication",
+    "applicationVersion": "1.1",
+    "command": "java",
+    "applicationDir": "D:\\Test_Cases\\Wave-Game-Build\\target\\classes\\",
+    "applicationName": "Game"
+  }
+}

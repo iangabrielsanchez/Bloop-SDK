@@ -1,4 +1,4 @@
-package com.tdc.bloop.listener.model
+package com.tdc.bloop.model
 
 import com.tdc.bloop.listener.core.BloopListenerService
 import com.tdc.bloop.listener.core.HelloStatus
@@ -38,7 +38,7 @@ class HelloResponse extends Response {
                         key: BloopSecurity.generateRandomKey()
                 )
             }
-            else if( BloopListenerService.clients[ request.hostIP ].macAddres == request.macAddress ) {
+            else if( BloopListenerService.clients[ request.hostIP ].macAddress == request.macAddress ) {
                 status = HelloStatus.ALREADY_EXISTS
             }
             else {

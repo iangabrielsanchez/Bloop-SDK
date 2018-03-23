@@ -11,5 +11,13 @@
 
     <artifactId>bloop-api-core</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.tdc</groupId>
+            <artifactId>bloop-listener-service</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 
 </project>

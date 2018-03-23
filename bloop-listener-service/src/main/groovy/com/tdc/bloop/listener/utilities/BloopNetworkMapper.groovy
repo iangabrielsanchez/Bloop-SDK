@@ -2,9 +2,9 @@ package com.tdc.bloop.listener.utilities
 
 import com.tdc.bloop.listener.core.BloopClient
 import com.tdc.bloop.listener.core.BloopListenerService
-import com.tdc.bloop.listener.model.BloopSettings
-import com.tdc.bloop.listener.model.HelloRequest
-import com.tdc.bloop.listener.model.HelloResponse
+import com.tdc.bloop.model.BloopSettings
+import com.tdc.bloop.model.HelloRequest
+import com.tdc.bloop.model.HelloResponse
 import groovy.json.JsonException
 import groovy.json.JsonSlurper
 
@@ -73,8 +73,8 @@ class BloopNetworkMapper implements Runnable {
                 }
             }
             catch( Exception ex ) {
-                logger.error( 'Unexpected error occured.', ex.message)
-                ex.printStackTrace(  )
+                logger.error( 'Unexpected error occured.', ex.message )
+                ex.printStackTrace()
             }
         }
     }
