@@ -19,5 +19,9 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <sourceDirectory>src/main/groovy</sourceDirectory>
+    </build>
+
 
 </project>

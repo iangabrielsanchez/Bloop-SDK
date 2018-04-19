@@ -25,4 +25,8 @@
             <version>1.1</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <sourceDirectory>src/main/groovy</sourceDirectory>
+    </build>
 </project>
