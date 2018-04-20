@@ -9,7 +9,7 @@ class BloopProperties {
 
     private static final String PROP_FILE_NAME = 'config.properties'
     private final Logger logger = LogManager.getLogger( getClass().getSimpleName() )
-    private final Properties properties;
+    private final Properties properties
     private final File propFile
     private boolean autoSave = false
 
@@ -50,13 +50,68 @@ class BloopProperties {
         listenerVersion = properties.getProperty( "listenerVersion" )
     }
 
+
+    int getTimeout() {
+        return timeout
+    }
+
+    void setTimeout( int timeout ) {
+        this.timeout = timeout
+        autoSaveIfEnabled()
+    }
+
+    int getIpcPort() {
+        return ipcPort
+    }
+
+    void setIpcPort( int ipcPort ) {
+        this.ipcPort = ipcPort
+        autoSaveIfEnabled()
+    }
+
+    int getTcpPort() {
+        return tcpPort
+    }
+
+    void setTcpPort( int tcpPort ) {
+        this.tcpPort = tcpPort
+        autoSaveIfEnabled()
+    }
+
+    int getUdpPort() {
+        return udpPort
+    }
+
+    void setUdpPort( int udpPort ) {
+        this.udpPort = udpPort
+        autoSaveIfEnabled()
+    }
+
+    int getBufferSize() {
+        return bufferSize
+    }
+
+    void setBufferSize( int bufferSize ) {
+        this.bufferSize = bufferSize
+        autoSaveIfEnabled()
+    }
+
+    String getListenerVersion() {
+        return listenerVersion
+    }
+
+    void setListenerVersion( String listenerVersion ) {
+        this.listenerVersion = listenerVersion
+        autoSaveIfEnabled()
+    }
+
     void save() {
         save( '' )
     }
 
     void save( String comment ) {
         FileOutputStream outputStream = new FileOutputStream( propFile )
-        store( outputStream, comment )
+        properties.store( outputStream, comment )
         outputStream.close()
     }
 
@@ -66,6 +121,11 @@ class BloopProperties {
 
     void setAutoSave( boolean autoSave ) {
         this.autoSave = autoSave
+    }
+
+    void autoSaveIfEnabled() {
+        if( isAutoSave() )
+            save()
     }
 
     @Override
